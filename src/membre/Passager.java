@@ -1,7 +1,5 @@
 package membre;
 
-import java.io.NotActiveException;
-
 public class Passager {
 	protected String pseudo;
 	private String nom;
@@ -15,19 +13,51 @@ public class Passager {
 		this.nom=nom;
 		this.prenom=prenom;
 		this.email=email;
-		// Je vérifie que le téléphone est bien un entier , de 10 chiffres.
-		try { 
-			
-			int i = Integer.parseInt(telephone); 
-		} 
-		catch (Exception e) { 
-			System.out.println("Je ne suis pas un entier, et alors ca te derange ?"); 
-		}
-		catch (NotTelException e)
-		{
-			
-		}
+		this.telephone = new Telephone (telephone);
 		
 	}
+
+
+	
+	public String getNom() {
+		return nom;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public Telephone getTelephone() {
+		return telephone;
+	}
+
+
+	public void setTelephone(Telephone telephone) {
+		this.telephone = telephone;
+	}
+	
+	
 
 }
