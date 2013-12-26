@@ -1,5 +1,6 @@
 package membre;
 
+import vehicules.Voiture;
 import java.util.ArrayList;
 import java.util.List;
 
