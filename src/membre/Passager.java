@@ -58,6 +58,9 @@ public class Passager {
 		this.telephone = telephone;
 	}
 	
+	public String toString (){
+		return "Pseudo : " + pseudo + "\n Nom : "+ nom +"\n Prénom : "+ prenom +"\n Email : "+ email +"\n Téléphone : "+ telephone;
+	}
 	
 
 }
