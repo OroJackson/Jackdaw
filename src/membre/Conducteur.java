@@ -13,6 +13,18 @@ public class Conducteur extends Passager {
 		this.vehicules = new ArrayList<Voiture>();
 	}
 	
+	public void ajouterVoiture(Voiture aAjouter){
+		if (!possede(aAjouter)) vehicules.add(aAjouter);
+	}
+	
+	public boolean possede(Voiture v){
+		return vehicules.contains(v);
+	}
+	
+	public boolean aUneVoiture(){
+		return vehicules.size()!=0;
+	}
+	
 	public String toString(){
 		if (vehicules.size()==0) return "Aucune voiture associée";
 		
