@@ -13,5 +13,14 @@ public class Conducteur extends Passager {
 		this.vehicules = new ArrayList<Voiture>();
 	}
 	
+	public String toString(){
+		if (vehicules.size()==0) return "Aucune voiture associée";
+		
+		String affichage="";
+		for (int i=0; i<vehicules.size(); i++){
+			affichage = affichage + vehicules.get(i).toString();
+		}
+		return affichage;
+	}
 	
 }

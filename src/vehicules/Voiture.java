@@ -16,4 +16,14 @@ public class Voiture {
 			this.confort=confort;
 		}
 	}
+	
+	
+	public String toString(){
+		String affichage = "Modéle :" + modele +"\n Couleur : "+ couleur;
+		for (int i=0; i<confort; i++){
+			affichage =affichage+"*";
+		}
+		return affichage;
+	}
 }
+
