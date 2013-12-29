@@ -1,10 +1,15 @@
 package covoiturage;
-import vehicules.*;;
+import vehicules.*;
 
 public class Covoiturage {
-	public static void main (String[] args){
-		Voiture v1 = new Voiture("Smart","Rouge",5);
+
+	public static void main(String[] args) {
+		System.out.println("Hello");
 		
-		System.out.println(v1);
+		Voiture v= new Voiture("Smart","Rouge", 5);
+		
+		System.out.println(v);
+
 	}
 }
+

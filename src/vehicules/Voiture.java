@@ -19,9 +19,9 @@ public class Voiture {
 	
 	
 	public String toString(){
-		String affichage = "Modéle :" + modele +"\n Couleur : "+ couleur;
+		String affichage = " Modele : " + modele +"\n Couleur : "+ couleur+ "\n Confort : ";
 		for (int i=0; i<confort; i++){
-			affichage =affichage+"*";
+			affichage =affichage+"* ";
 		}
 		return affichage;
 	}
