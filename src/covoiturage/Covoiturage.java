@@ -8,7 +8,7 @@ public class Covoiturage {
 		
 		Voiture v= new Voiture("Smart","Rouge", 5);
 		
-		System.out.println(v);
+		System.out.println("test");
 
 	}
 }
