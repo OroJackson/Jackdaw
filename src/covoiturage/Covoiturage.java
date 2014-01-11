@@ -1,5 +1,5 @@
 package covoiturage;
-import vehicules.*;
+import vehicules.Voiture;
 
 public class Covoiturage {
 
@@ -12,4 +12,3 @@ public class Covoiturage {
 
 	}
 }
-

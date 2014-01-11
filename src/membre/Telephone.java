@@ -13,7 +13,7 @@ public class Telephone {
 			telDeBonneTaille(n);
 		}
 		catch (NotTelException e){
-			// Le telephone n'est pas de la bonne taille;
+			// Le numero de telephone n'est pas de la bonne taille;
 			System.out.println("Numero de téléphone incorrect");
 			numero="incorrect";
 			correct = true;
