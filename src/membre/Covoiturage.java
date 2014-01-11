@@ -1,8 +1,10 @@
-package covoiturage;
+package membre;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import vehicules.Voiture;
 
 public class Covoiturage {
 	private List<Passager> membres = new ArrayList<Passager>();
