@@ -1,4 +1,4 @@
-package vehicules;
+package membre;
 
 public class Voiture {
 	private String modele;

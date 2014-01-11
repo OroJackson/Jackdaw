@@ -1,6 +1,7 @@
 package membre;
 
 public class Passager {
+	
 	protected String pseudo;
 	private String nom;
 	private String prenom;
