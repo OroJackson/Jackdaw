@@ -6,7 +6,7 @@ public class Passager {
 	private String nom;
 	private String prenom;
 	private String email;
-	private Telephone telephone;
+	private String telephone;
 	
 	
 	public Passager (String pseudo,String nom, String prenom, String email,String telephone){
@@ -14,7 +14,7 @@ public class Passager {
 		this.nom=nom;
 		this.prenom=prenom;
 		this.email=email;
-		this.telephone = new Telephone (telephone);
+		this.telephone = telephone;
 		
 	}
 
@@ -50,12 +50,12 @@ public class Passager {
 	}
 
 
-	public Telephone getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
 
-	public void setTelephone(Telephone telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	

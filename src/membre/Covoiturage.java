@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import vehicules.Voiture;
-
 public class Covoiturage {
 	private List<Passager> membres = new ArrayList<Passager>();
 	
@@ -35,6 +33,8 @@ public class Covoiturage {
 		Voiture v1= new Voiture("C4","blanche",5);
 		
 		System.out.println(v1);
+		
 
 	}
+	
 }
