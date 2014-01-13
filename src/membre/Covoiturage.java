@@ -1,10 +1,10 @@
 package membre;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.*;
+import java.util.*;
 
 public class Covoiturage {
+	private List<Trajet> trajets = new ArrayList<Trajet>();
 	private List<Passager> membres = new ArrayList<Passager>();
 	Passager connecte;
 	
@@ -117,8 +117,23 @@ public class Covoiturage {
 		}
 		connecte.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
 	}
-	public void creationTrajet(){
-		System.out.println("Date du Trajet?");
+	public void creationTrajet() throws ParseException{
+		System.out.println("Date du Trajet? (JJ:MM:AA)");
+		String dateT =sc.nextLine();
+		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yy");
+		Date date = format.parse(dateT);
+		GregorianCalendar dateTrajet = new GregorianCalendar();
+		dateTrajet.setTime(date);
+		System.out.println("Ville de depart?");
+		String villeDepart=sc.nextLine();
+		System.out.println("Ville d'arrivee?");
+		String villeArrivee=sc.nextLine();
+		System.out.println("Heure de depart du trajet ?(HHMM");
+		int heureDepart=sc.nextInt();
+		sc.nextLine();
+		
+		trajets.add(new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart));
+		
 	}
 	public void chercherTrajet(){
 		
@@ -129,7 +144,7 @@ public class Covoiturage {
 	public void monProfil(){
 		
 	}
-	public void menuPrincipal(){
+	public void menuPrincipal() throws ParseException{
 		System.out.println("1. Creer un trajet.");
 		System.out.println("2. Chercher un trajet.");
 		System.out.println("3. Mes trajets.");

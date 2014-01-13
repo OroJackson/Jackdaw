@@ -13,7 +13,7 @@ public class Trajet{
 	protected String villeArrivee;
 	protected int heureDepart;
 	protected Passager chauffeur;
-	protected List<Passager> inscrit = new ArrayList<Passager>();
+	protected List<Passager> inscrit;
 
 	/**
 	 * Constructeur de Trajet n'initialisant pas le Chauffeur du trajet(Trajet en attente d'un chauffeur)
@@ -29,6 +29,7 @@ public class Trajet{
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
 		this.heureDepart=heureDepart;
+		inscrit = new ArrayList<Passager>();
 	}
 	
 	/**
@@ -47,6 +48,8 @@ public class Trajet{
 		this.villeArrivee=villeArrivee;
 		this.heureDepart=heureDepart;
 		this.chauffeur=chauffeur;
+		inscrit = new ArrayList<Passager>();
+
 	}
 
 /**
