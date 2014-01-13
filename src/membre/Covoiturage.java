@@ -107,6 +107,7 @@ public class Covoiturage {
 			sc.nextLine();
 			System.out.println("Le confort se note sur 5");
 			confort= sc.nextInt();
+			sc.nextLine();
 		}
 
 		System.out.println("Nombre de place de la voiture:(hors conducteur)");
@@ -115,6 +116,7 @@ public class Covoiturage {
 			sc.nextLine();
 			System.out.println("Le nombres de place est compris entre 1 et 8");
 			nbPlaces= sc.nextInt();
+			sc.nextLine();
 		}
 		connecte.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
 	}
@@ -147,6 +149,7 @@ public class Covoiturage {
 			monProfil();
 			break;
 		}
+		sc.nextLine();
 	}
 /*
 	public static void main(String[] args) {

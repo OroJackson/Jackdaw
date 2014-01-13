@@ -14,7 +14,6 @@ public class Passager {
 	
 	private List<Voiture> voitures = new ArrayList<Voiture>();
 	
-	
 	public Passager (String pseudo,String nom, String prenom, String email,String telephone,String mdp){
 		this.pseudo=pseudo;
 		this.nom=nom;
@@ -30,7 +29,7 @@ public class Passager {
 	}
 	
 	public void ajouterVoiture(Voiture v){
-		voitures.add(v);
+		voitures.add(0,v);
 	}
 	
 	public void supprimerVoiture (Voiture v){
@@ -89,6 +88,22 @@ public class Passager {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
+	}
+
+	public Voiture getVoiture() {
+		return voitures.get(0);
+	}
+
+	public void setVoiturePrincipale(Voiture voiturePrincipale) {
+		int i=0;
+		while(i<voitures.size()){
+			if(voitures.get(i).equals(voiturePrincipale)){
+				voitures.add(0,voitures.get(i));
+				voitures.remove(voitures.get(i));
+				i+=voitures.size();
+			}
+			i++;
+		}
 	}
 	
 

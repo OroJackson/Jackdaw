@@ -30,5 +30,9 @@ public class Voiture {
 		}
 		return affichage;
 	}
+	
+	public int getPlace(){
+		return nbPlaces;
+	}
 }
 
