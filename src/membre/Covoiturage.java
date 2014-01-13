@@ -118,7 +118,36 @@ public class Covoiturage {
 		}
 		connecte.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
 	}
-	
+	public void chercherTrajet(){
+		
+	}
+	public void mesTrajets(){
+		
+	}
+	public void monProfil(){
+		
+	}
+	public void menuPrincipal(){
+		System.out.println("1. Creer un trajet.");
+		System.out.println("2. Chercher un trajet.");
+		System.out.println("3. Mes trajets.");
+		System.out.println("4. Mon profil.");
+		
+		switch(sc.nextInt()){
+		case 1:
+			creationTrajet();
+			break;
+		case 2:
+			chercherTrajet();
+			break;
+		case 3:
+			mesTrajets();
+			break;
+		case 4:
+			monProfil();
+			break;
+		}
+	}
 /*
 	public static void main(String[] args) {
 		System.out.println("Hello");
