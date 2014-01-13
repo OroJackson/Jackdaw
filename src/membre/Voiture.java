@@ -19,7 +19,7 @@ public class Voiture {
 		}
 	}
 	public boolean equals(Voiture v){
-		return (modele.equals(v.modele) && couleur.equals(v.couleur) && confort==v.confort);
+		return (modele.equals(v.modele) && couleur.equals(v.couleur) && confort==v.confort && nbPlaces==v.nbPlaces);
 	}
 	
 	
