@@ -95,15 +95,8 @@ public class Passager {
 	}
 
 	public void setVoiturePrincipale(Voiture voiturePrincipale) {
-		int i=0;
-		while(i<voitures.size()){
-			if(voitures.get(i).equals(voiturePrincipale)){
-				voitures.add(0,voitures.get(i));
-				voitures.remove(voitures.get(i));
-				i+=voitures.size();
-			}
-			i++;
-		}
+		voitures.add(0,voiturePrincipale);
+		supprimerVoiture(voiturePrincipale);
 	}
 	
 

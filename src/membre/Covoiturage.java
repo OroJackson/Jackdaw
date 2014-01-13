@@ -46,9 +46,6 @@ public class Covoiturage {
 		System.out.println("\nVous voilà inscript sur le Jackdaw !");	
 	}
 	
-	public void creationTrajet(){
-		
-	}
 	//True si connexion reussi false sinon
 	public boolean connexion(){
 		System.out.println("Identifiant :");
@@ -119,6 +116,9 @@ public class Covoiturage {
 			sc.nextLine();
 		}
 		connecte.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
+	}
+	public void creationTrajet(){
+		System.out.println("Date du Trajet?");
 	}
 	public void chercherTrajet(){
 		
