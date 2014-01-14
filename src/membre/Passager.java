@@ -11,6 +11,7 @@ public class Passager {
 	private String email;
 	private String telephone;
 	private String mdp;
+	private String message;
 	
 	private List<Trajet> mesTrajets= new ArrayList<Trajet>();
 	
