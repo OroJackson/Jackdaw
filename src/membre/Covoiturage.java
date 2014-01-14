@@ -14,8 +14,22 @@ public class Covoiturage {
 	private List<Passager> membres = new ArrayList<Passager>();
 	Passager connecte;
 	
-	public Covoiturage(){
-		membres.add(new Passager("admin",null,null,null,null,"mdp"));
+	public Covoiturage() throws ParseException{
+		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
+		membres.add(tmp);
+		Trajet t =new Trajet("12:13:14","test1","test1",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+		t =new Trajet("12:13:14","test2","test2",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+		t=new Trajet("12:13:14","test3","test3",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+		t=new Trajet("12:13:14","test4","test4",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+
 	}
 	
 	private Scanner sc= new Scanner (System.in);
@@ -147,11 +161,7 @@ public class Covoiturage {
 	}
 	public void creationTrajet() throws ParseException{
 		System.out.println("Date du Trajet? (JJ:MM:AA)");
-		String dateT =sc.nextLine();
-		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yy");
-		Date date = format.parse(dateT);
-		GregorianCalendar dateTrajet = new GregorianCalendar();
-		dateTrajet.setTime(date);
+		String dateTrajet =sc.nextLine();
 		System.out.println("Ville de depart?");
 		String villeDepart=sc.nextLine();
 		System.out.println("Ville d'arrivee?");
@@ -166,12 +176,14 @@ public class Covoiturage {
 			rep=sc.nextLine();
 		}
 		if(rep.equals("o")){
-			trajets.add(new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart,connecte));
-
+			Trajet courant=new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart,connecte);
+			trajets.add(courant);
+			connecte.addTrajet(courant);
 		}else{
 			Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart);
 			courant.addParticipant(connecte);
 			trajets.add(courant);
+			
 		}
 	}
 	public void chercherTrajet(){
@@ -188,10 +200,7 @@ public class Covoiturage {
 		System.out.println("2. Chercher un trajet.");
 		System.out.println("3. Mes trajets.");
 		System.out.println("4. Mon profil.");
-		System.out.println("5. Déconnexion.\n");
-		System.out.print("Votre choix :");
 		int rep=sc.nextInt();
-		System.out.println();
 		sc.nextLine();
 		switch(rep){
 		case 1:
@@ -201,13 +210,10 @@ public class Covoiturage {
 			chercherTrajet();
 			break;
 		case 3:
-			mesTrajets();
+			connecte.afficherMesTrajets();
 			break;
 		case 4:
 			monProfil();
-			break;
-		case 5:
-			System.out.println("Aurevoir "+ connecte.getPrenom());
 			break;
 		}
 		

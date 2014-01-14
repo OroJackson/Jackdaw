@@ -1,4 +1,6 @@
 package membre;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -9,6 +11,7 @@ import java.util.*;
  */
 public class Trajet{
 	protected GregorianCalendar dateTrajet;
+
 	protected String villeDepart;
 	protected String villeArrivee;
 	protected int heureDepart;
@@ -18,13 +21,18 @@ public class Trajet{
 	/**
 	 * Constructeur de Trajet n'initialisant pas le Chauffeur du trajet(Trajet en attente d'un chauffeur)
 	 * 
-	 * @param dateTrajet , date du trajet proposé
+	 * @param dateTrajet , date du trajet propos��
 	 * @param villeDepart , ville de depart du trajet
-	 * @param villeArrivee , ville d'arrivée du trajet
+	 * @param villeArrivee , ville d'arriv��e du trajet
 	 * @param heureDepart  , heure de depart du trajet
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
+	 * @throws ParseException 
 	 */
-	public Trajet(GregorianCalendar dateTrajet,String villeDepart,String villeArrivee,int heureDepart){
+	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart) throws ParseException{
+		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yy");
+		Date date = format.parse(dateT);
+		GregorianCalendar dateTrajet = new GregorianCalendar();
+		dateTrajet.setTime(date);
 		this.dateTrajet=dateTrajet;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
@@ -33,16 +41,21 @@ public class Trajet{
 	}
 	
 	/**
-	 * Constructeur initialisant le chauffeur du trajet(Trajet crée par un conducteur)
+	 * Constructeur initialisant le chauffeur du trajet(Trajet cr��e par un conducteur)
 	 * 
-	 * @param dateTrajet , date du trajet proposé
+	 * @param dateTrajet , date du trajet propos��
 	 * @param villeDepart , ville de depart du trajet
-	 * @param villeArrivee , ville d'arrivée du trajet
+	 * @param villeArrivee , ville d'arriv��e du trajet
 	 * @param heureDepart  , heure de depart du trajet
 	 * @param chauffeur , passager du trajet qui sera conducteur et donc qui fourni la voiture
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
+	 * @throws ParseException 
 	 */
-	public Trajet(GregorianCalendar dateTrajet,String villeDepart,String villeArrivee,int heureDepart,Passager chauffeur){
+	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart,Passager chauffeur) throws ParseException{
+		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yy");
+		Date date = format.parse(dateT);
+		GregorianCalendar dateTrajet = new GregorianCalendar();
+		dateTrajet.setTime(date);
 		this.dateTrajet=dateTrajet;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
@@ -74,7 +87,7 @@ public class Trajet{
 /**
  * Methode permettant d'ajouter un passager a un trajet
  * @param p : instance de passager a ajouter au trajet
- * @return un booleen vrai si le trajet n'était pas plein, faux si il etait plein
+ * @return un booleen vrai si le trajet n'��tait pas plein, faux si il etait plein
  */
 	public boolean addParticipant(Passager p){
 		if(!this.estPlein()){
@@ -97,6 +110,30 @@ public class Trajet{
  */
 	public boolean aUnConducteur(){
 		return chauffeur!=null;
+	}	
+	
+	public GregorianCalendar getDateTrajet() {
+		return dateTrajet;
+	}
+
+	public String getVilleDepart() {
+		return villeDepart;
+	}
+
+	public String getVilleArrivee() {
+		return villeArrivee;
+	}
+
+	public int getHeureDepart() {
+		return heureDepart;
+	}
+
+	public Passager getChauffeur() {
+		return chauffeur;
+	}
+
+	public List<Passager> getInscrit() {
+		return inscrit;
 	}
 }
 
