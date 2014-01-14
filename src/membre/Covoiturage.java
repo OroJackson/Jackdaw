@@ -182,7 +182,24 @@ public class Covoiturage {
 		
 	}
 	public void monProfil(){
-		
+		System.out.println(connecte);
+		System.out.println("Souhaitez vous :");
+		System.out.println("1. Ajouter une voiture");
+		System.out.println("2. Supprimer une voiture");
+		System.out.println("3. Modifier votre mot de passe");
+		int rep=sc.nextInt();
+		sc.nextLine();
+		switch(rep){
+		case 1:
+			ajoutVoiture(connecte);
+			break;
+		case 2:
+			connecte.supprimerVoiture();
+			break;
+		case 3:
+			connecte.setMdp();
+			break;
+		}
 	}
 	public void menuPrincipal() throws ParseException{
 		System.out.println("1. Creer un trajet.");
