@@ -202,8 +202,13 @@ public class Covoiturage {
 		}
 	}
 	private void changeMdp() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Quelle est votre mot de passe actuel:");
+		String rep=sc.nextLine();
+		if(rep.equals(connecte.getMdp())){
+			System.out.println("Entrez un nouveau mot de passe:");
+			rep=sc.nextLine();
+			connecte.setMdp(rep);
+		}
 	}
 
 	private void supprimerVoiture() {
