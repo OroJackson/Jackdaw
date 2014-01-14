@@ -12,7 +12,6 @@ import java.text.*;
  */
 public class Trajet{
 	protected DatePerso dateTrajet;
-
 	protected String villeDepart;
 	protected String villeArrivee;
 	protected int heureDepart;
