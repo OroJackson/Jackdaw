@@ -95,8 +95,8 @@ public class Passager {
 	}
 
 	public void setVoiturePrincipale(Voiture voiturePrincipale) {
-		voitures.add(0,voiturePrincipale);
 		supprimerVoiture(voiturePrincipale);
+		voitures.add(0,voiturePrincipale);
 	}
 	
 

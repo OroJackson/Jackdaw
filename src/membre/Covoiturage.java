@@ -3,12 +3,25 @@ package membre;
 import java.text.*;
 import java.util.*;
 
+/**
+ * Classe Covoiturage. Regroupe l'ensemble des fonctionnalité du covoiturage
+ * 
+ * @author Aurie
+ * @version 1.0
+ */
 public class Covoiturage {
 	private List<Trajet> trajets = new ArrayList<Trajet>();
 	private List<Passager> membres = new ArrayList<Passager>();
 	Passager connecte;
 	
+	public Covoiturage(){
+		membres.add(new Passager("admin",null,null,null,null,"mdp"));
+	}
+	
 	private Scanner sc= new Scanner (System.in);
+	/**
+	 * Méthode réalisant l'inscription d'un membre dans le Covoiturage
+	 */
 	public void inscription (){
 		
 		System.out.print("Pseudo :");
@@ -46,7 +59,11 @@ public class Covoiturage {
 		System.out.println("\nVous voilà inscript sur le Jackdaw !");	
 	}
 	
-	//True si connexion reussi false sinon
+	/**
+	 * Méthode de connexion au Covoiturage.
+	 * 
+	 * @return false si la connexion c'est bien passé,True sinon.
+	 */
 	public boolean connexion(){
 		System.out.println("Identifiant :");
 		String pseudo= sc.nextLine();
@@ -62,6 +79,9 @@ public class Covoiturage {
 		}
 		return false;
 	}
+	/**
+	 * Méthode donnant le choix a l'utilisateur de réésayer la connexion ou de revenir au Menu
+	 */
 	public void boucleConnexion(){
 		boolean situation= false;
 		while (!situation){
@@ -76,18 +96,26 @@ public class Covoiturage {
 			}
 		}
 	}
+	/**
+	 * Méthode réalisant la déconnexion d'un membre du Covoiturage.
+	 */
 	public void deconnexion(){
 		connecte=null;
 	}
+	/**
+	 * Menu proposant à l'utilisateur de se connecter ou de s'inscrire
+	 * @return Le numéro de la répond : 1 pour connexion ou 2 pour inscription.
+	 */
 	public int menuConnexion(){
 		
 		System.out.println("Bienvenue sur le Jackdaw.\n");
 		System.out.println("1. Connexion");
 		System.out.println("2. S'inscrire\n");
-		System.out.println("Votre choix :");
+		System.out.print("Votre choix :");
 		
 		int reponse = sc.nextInt();
 		sc.nextLine();
+		System.out.println();
 
 		return reponse;
 	}
@@ -131,9 +159,20 @@ public class Covoiturage {
 		System.out.println("Heure de depart du trajet ?(HHMM");
 		int heureDepart=sc.nextInt();
 		sc.nextLine();
-		
-		trajets.add(new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart));
-		
+		System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
+		String rep=sc.nextLine();
+		while(rep.equals("o") && rep.equals("n")){
+			System.out.println("Veuillez repondre par 'o' ou 'n'");
+			rep=sc.nextLine();
+		}
+		if(rep.equals("o")){
+			trajets.add(new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart,connecte));
+
+		}else{
+			Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart);
+			courant.addParticipant(connecte);
+			trajets.add(courant);
+		}
 	}
 	public void chercherTrajet(){
 		
@@ -149,8 +188,12 @@ public class Covoiturage {
 		System.out.println("2. Chercher un trajet.");
 		System.out.println("3. Mes trajets.");
 		System.out.println("4. Mon profil.");
-		
-		switch(sc.nextInt()){
+		System.out.println("5. Déconnexion.\n");
+		System.out.print("Votre choix :");
+		int rep=sc.nextInt();
+		System.out.println();
+		sc.nextLine();
+		switch(rep){
 		case 1:
 			creationTrajet();
 			break;
@@ -163,18 +206,10 @@ public class Covoiturage {
 		case 4:
 			monProfil();
 			break;
+		case 5:
+			System.out.println("Aurevoir "+ connecte.getPrenom());
+			break;
 		}
-		sc.nextLine();
+		
 	}
-/*
-	public static void main(String[] args) {
-		System.out.println("Hello");
-		
-		Voiture v1= new Voiture("C4","blanche",5,5);
-		
-		System.out.println(v1);
-		
-
-	}*/
-	
 }
