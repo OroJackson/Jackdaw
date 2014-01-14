@@ -33,6 +33,10 @@ public class Passager {
 	public void supprimerTrajet(Trajet t){
 		
 	}
+	
+	public boolean equals(Passager p){
+		return pseudo.equals(p.pseudo);
+	}
 
 	public boolean estUnConducteur(){
 		return voitures.isEmpty();
@@ -101,7 +105,11 @@ public class Passager {
 	}
 
 	public Voiture getVoiture() {
+		if (voitures.size()!=0){
 		return voitures.get(0);
+		}else{
+			return null;
+		}
 	}
 
 	public void setVoiturePrincipale(Voiture voiturePrincipale) {
@@ -114,15 +122,23 @@ public class Passager {
 			System.out.println("Vous n'avez aucun trajet.");
 		}
 		for (int i=0; i<mesTrajets.size(); i++){
-			System.out.print( (i+1) +". le "+mesTrajets.get(i).getDateTrajet()+" a "+mesTrajets.get(i).getHeureDepart()+" - "+mesTrajets.get(i).getVilleDepart()+"/"+mesTrajets.get(i).getVilleArrivee());
-			if (mesTrajets.get(i).getChauffeur()==this){
-				System.out.print(" (Vous etes le conducteur) ");
+			System.out.println((i+1)+"  "+mesTrajets.get(i).toString());	
+			if (mesTrajets.get(i).estPlein()==-1){
+				System.out.print("(Trajet en attente d'un conducteur)");
+			}else{
+				if (mesTrajets.get(i).getChauffeur().equals(this)){
+					System.out.print(" (Vous etes le conducteur) ");
+				}
 			}
-			if (mesTrajets.get(i).estPlein()){
+			if (mesTrajets.get(i).estPlein()==1){
 				System.out.print(" (Trajet Plein) ");
 			}
 			System.out.println();
 		}
+	}
+
+	public String getPseudo() {
+		return pseudo;
 	}
 	
 

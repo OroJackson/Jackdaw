@@ -17,16 +17,14 @@ public class Covoiturage {
 	public Covoiturage() throws ParseException{
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
-		Trajet t =new Trajet("12:13:14","test1","test1",1700,tmp);
+		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
+		Trajet t =new Trajet("12:13:2014","test1","test1",1700,tmp);
 		trajets.add(t);
 		tmp.addTrajet(t);
-		t =new Trajet("12:13:14","test2","test2",1700,tmp);
+		t=new Trajet("12:13:2014","test3","test3",1700,tmp);
 		trajets.add(t);
 		tmp.addTrajet(t);
-		t=new Trajet("12:13:14","test3","test3",1700,tmp);
-		trajets.add(t);
-		tmp.addTrajet(t);
-		t=new Trajet("12:13:14","test4","test4",1700,tmp);
+		t=new Trajet("12:13:2014","test4","test4",1700,tmp);
 		trajets.add(t);
 		tmp.addTrajet(t);
 
@@ -57,20 +55,10 @@ public class Covoiturage {
 	
 		// Verifier la validité de l'email
 		// Verifier téléphone
-		System.out.print("\nPossedez vous une voiture ? (o/n)");
-		String reponse=  sc.nextLine();
 		
-		
-		while (reponse.equals("o") && reponse.equals("n")){
-			System.out.print("\nVeuillez répondre par 'o' ou 'n'.");
-			sc.nextLine();
-			reponse= sc.nextLine();
-		}
-		if (reponse.equals("o")){
-			ajoutVoiture();
-		} 
-		
-		System.out.println("\nVous voilà inscript sur le Jackdaw !");	
+		System.out.println("\nVous voilà inscript sur le Jackdaw !");
+		System.out.println("Vous êtes passager, pour ajouter une voiture, allez dans votre profil");
+		System.out.println("Bon Voyages "+ prenom +"!");
 	}
 	
 	/**
@@ -134,7 +122,7 @@ public class Covoiturage {
 		return reponse;
 	}
 	
-	public void ajoutVoiture(){
+	public void ajoutVoiture(Passager p){
 		
 		System.out.println("Modéle de la voiture :");
 		String modele= sc.nextLine();
@@ -157,7 +145,7 @@ public class Covoiturage {
 			nbPlaces= sc.nextInt();
 			sc.nextLine();
 		}
-		connecte.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
+		p.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
 	}
 	public void creationTrajet() throws ParseException{
 		System.out.println("Date du Trajet? (JJ:MM:AA)");

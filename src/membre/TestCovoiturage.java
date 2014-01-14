@@ -1,4 +1,4 @@
-1package membre;
+package membre;
 
 import java.text.ParseException;
 
@@ -7,6 +7,8 @@ public class TestCovoiturage {
 	public static void main(String[] args) throws ParseException {
 		boolean quitter=false;
 		Covoiturage co=new Covoiturage();
+		
+		
 		// Menu de connexion/inscription
 		while(!quitter){
 			while (co.connecte==null){

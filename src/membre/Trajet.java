@@ -1,7 +1,8 @@
 package membre;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
+import java.text.*;
+
 
 /**
  * Class Trajet, representant les futurs trajet de covoiturage
@@ -10,7 +11,7 @@ import java.util.*;
  * @version 1.0
  */
 public class Trajet{
-	protected GregorianCalendar dateTrajet;
+	protected DatePerso dateTrajet;
 
 	protected String villeDepart;
 	protected String villeArrivee;
@@ -29,11 +30,11 @@ public class Trajet{
 	 * @throws ParseException 
 	 */
 	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart) throws ParseException{
-		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yy");
+		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yyyy");
 		Date date = format.parse(dateT);
-		GregorianCalendar dateTrajet = new GregorianCalendar();
+		GregorianCalendar dateTrajet = new DatePerso();
 		dateTrajet.setTime(date);
-		this.dateTrajet=dateTrajet;
+		this.dateTrajet=(DatePerso) dateTrajet;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
 		this.heureDepart=heureDepart;
@@ -52,11 +53,11 @@ public class Trajet{
 	 * @throws ParseException 
 	 */
 	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart,Passager chauffeur) throws ParseException{
-		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yy");
+		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yyyy");
 		Date date = format.parse(dateT);
-		GregorianCalendar dateTrajet = new GregorianCalendar();
+		GregorianCalendar dateTrajet = new DatePerso();
 		dateTrajet.setTime(date);
-		this.dateTrajet=dateTrajet;
+		this.dateTrajet=(DatePerso) dateTrajet;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
 		this.heureDepart=heureDepart;
@@ -66,11 +67,19 @@ public class Trajet{
 	}
 
 /**
- *  methode permettant de savoir si un trajet est plein ou pas
- * @return un booleen vrai si le trajet n'as plus de place, faut si il en reste
+ *  methode permettant de savoir si un trajet est plein ou pas ou s'il attend un conducteur.
+ * @return un Int 1 signifiant que le trajet est plein, 0 s'il n'est pas plein, -1 si il est en attente d'un conducteur
  */
-	public boolean estPlein(){
-		return inscrit.size()==chauffeur.getVoiture().getPlace();
+	public int estPlein(){
+		if (chauffeur!=null){
+			if (inscrit.size()==chauffeur.getVoiture().getPlace()){
+				return 1;
+			}else{
+				return 0;
+			}
+		}else{
+			return -1;
+		}
 	}
 
 /**
@@ -78,7 +87,7 @@ public class Trajet{
  * @return un int nbPlaceRestante corredpondant au nombre de places restantes.
  */
 	public int nbPlaceRestante(){
-		if(!this.estPlein()){
+		if(this.estPlein()==0){
 			return chauffeur.getVoiture().getPlace()-inscrit.size();
 		}else{
 			return 0;
@@ -90,7 +99,7 @@ public class Trajet{
  * @return un booleen vrai si le trajet n'��tait pas plein, faux si il etait plein
  */
 	public boolean addParticipant(Passager p){
-		if(!this.estPlein()){
+		if(this.estPlein()==0){
 			inscrit.add(p);
 			return true;
 		}else{
@@ -112,7 +121,19 @@ public class Trajet{
 		return chauffeur!=null;
 	}	
 	
-	public GregorianCalendar getDateTrajet() {
+	public String toString(){
+		String affichage="Date: "+ dateTrajet.toString() +"\n"+"Depart: "+villeDepart+"\n"+"Arrivee: "+villeArrivee+"\n";
+				if(chauffeur==null){
+					affichage+="Chauffeur: Aucun\n";
+					affichage+="En attente d'un chauffeur";
+				}else{
+					affichage+="chauffeur: "+chauffeur.getPseudo()+"\n";
+					affichage+="Nombre de Place restante(s): "+nbPlaceRestante()+"\n";
+				}
+		return affichage;
+	}
+	
+	public DatePerso getDateTrajet() {
 		return dateTrajet;
 	}
 
