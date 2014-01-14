@@ -200,6 +200,7 @@ public class Covoiturage {
 		System.out.println("2. Chercher un trajet.");
 		System.out.println("3. Mes trajets.");
 		System.out.println("4. Mon profil.");
+		System.out.println("5. Déconnexion.");
 		int rep=sc.nextInt();
 		sc.nextLine();
 		switch(rep){
@@ -215,6 +216,8 @@ public class Covoiturage {
 		case 4:
 			monProfil();
 			break;
+		case 5:
+			System.out.println("Aurevoir "+connecte.getPrenom());
 		}
 		
 	}
