@@ -27,6 +27,15 @@ public class Passager {
 	}
 	
 	public void addTrajet(Trajet t){
+		int i=0;
+		while(i<mesTrajets.size()){
+
+			if (t.getDateTrajet().compareTo(mesTrajets.get(i).getDateTrajet())<0){
+				mesTrajets.add(i,t);
+				i+=mesTrajets.size();
+			}
+		}
+		i++;
 		mesTrajets.add(t);
 	}
 	
