@@ -194,13 +194,23 @@ public class Covoiturage {
 			ajoutVoiture(connecte);
 			break;
 		case 2:
-			connecte.supprimerVoiture();
+			supprimerVoiture();
 			break;
 		case 3:
-			connecte.setMdp();
+			changeMdp();
 			break;
 		}
 	}
+	private void changeMdp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void supprimerVoiture() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void menuPrincipal() throws ParseException{
 		System.out.println("1. Creer un trajet.");
 		System.out.println("2. Chercher un trajet.");

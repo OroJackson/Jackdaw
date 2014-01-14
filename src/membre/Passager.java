@@ -56,8 +56,12 @@ public class Passager {
 		voitures.add(0,v);
 	}
 	
-	public void supprimerVoiture (){
-		
+	public void supprimerVoiture (Voiture v){
+		for (int i=0; i<voitures.size(); i++){
+			if (voitures.get(i).equals(v)){
+				voitures.remove(i);
+			}
+		}
 	}
 
 	
@@ -108,8 +112,8 @@ public class Passager {
 		return mdp;
 	}
 
-	public void setMdp() {
-		
+	public void setMdp(String mdp) {
+		this.mdp=mdp;
  	}
 
 	public Voiture getVoiture() {
