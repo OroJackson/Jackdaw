@@ -48,7 +48,7 @@ public class Trajet{
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
 	 */
-	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart,Passager Chauffeur) throws ParseException{
+	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart,Passager chauffeur) throws ParseException{
 
 		this.dateTrajet.toDate(dateT);
 		this.villeDepart=villeDepart;
