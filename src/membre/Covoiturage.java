@@ -18,7 +18,17 @@ public class Covoiturage {
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
-	
+
+		Trajet t =new Trajet("12:13:2014","test1","test1",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+		t=new Trajet("12:13:2014","test3","test3",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+		t=new Trajet("12:13:2014","test4","test4",1700,tmp);
+		trajets.add(t);
+		tmp.addTrajet(t);
+
 		//devCreationTrajetACChauffeur("12:13:2014","test1","test1",1700,tmp);
 		//devCreationTrajetACChauffeur("12:13:2014","test2","test3",1700,tmp);
 		//devCreationTrajetACChauffeur("12:13:2014","test3","test4",1700,tmp);
