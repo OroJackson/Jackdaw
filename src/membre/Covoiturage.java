@@ -92,6 +92,7 @@ public class Covoiturage {
 			}
 		}
 	}
+	
 	/**
 	 * Méthode réalisant la déconnexion d'un membre du Covoiturage.
 	 */
@@ -150,7 +151,7 @@ public class Covoiturage {
 		String villeDepart=sc.nextLine();
 		System.out.println("Ville d'arrivee?");
 		String villeArrivee=sc.nextLine();
-		System.out.println("Heure de depart du trajet ?(HHMM)");
+		System.out.println("Heure de depart du trajet ?(HH:MM)");
 		String heureDepart=sc.nextLine();
 		System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
 		String rep=sc.nextLine();

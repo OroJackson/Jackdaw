@@ -12,10 +12,16 @@ public class DatePerso extends GregorianCalendar{
 	private static final long serialVersionUID = 1L;
 
 	
-	public void toDate(String dateT) throws ParseException{
+	public boolean toDate(String dateT) throws ParseException{
 		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yyyy");
-		Date date = format.parse(dateT);
-		setTime(date);
+		try{
+			Date date = format.parse(dateT);
+			setTime(date);
+
+		}catch(ParseException p){
+			return false;
+		}
+		return true;
 	}
 	public String toStringDate(){
 		DateFormat dateFormat = new SimpleDateFormat("dd:MM:yyyy");
@@ -27,10 +33,15 @@ public class DatePerso extends GregorianCalendar{
 		return dateFormat.format(this.getTime());
 	}
 	
-	public void setHeureDepart(String heureT) throws ParseException{
+	public boolean setHeureDepart(String heureT) throws ParseException{
 		SimpleDateFormat format =new SimpleDateFormat ("HH:mm");
+		try{
 		Date heure = format.parse(heureT);
 		setTime(heure);
+		}catch(ParseException p){
+			return false;
+		}
+		return true;
 	}
 	
 	public static void main(String[] args) throws ParseException{
