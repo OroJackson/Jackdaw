@@ -29,11 +29,8 @@ public class Trajet{
 	 * @throws ParseException 
 	 */
 	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart) throws ParseException{
-		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yyyy");
-		Date date = format.parse(dateT);
-		GregorianCalendar dateTrajet = new DatePerso();
-		dateTrajet.setTime(date);
-		this.dateTrajet=(DatePerso) dateTrajet;
+
+		this.dateTrajet.toDate(dateT);
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
 		this.heureDepart=heureDepart;
