@@ -19,9 +19,9 @@ public class Covoiturage {
 		membres.add(tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
-		devCreationTrajetACChauffeur("12:13:2014","test1","test1",1700,tmp);
-		devCreationTrajetACChauffeur("12:13:2014","test2","test3",1700,tmp);
-		devCreationTrajetACChauffeur("12:13:2014","test3","test4",1700,tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test1","test1","17:00",tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test2","test3","17:00",tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test3","test4","17:00",tmp);
 	}
 	
 	private Scanner sc= new Scanner (System.in);
@@ -151,8 +151,7 @@ public class Covoiturage {
 		System.out.println("Ville d'arrivee?");
 		String villeArrivee=sc.nextLine();
 		System.out.println("Heure de depart du trajet ?(HHMM)");
-		int heureDepart=sc.nextInt();
-		sc.nextLine();
+		String heureDepart=sc.nextLine();
 		System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
 		String rep=sc.nextLine();
 		while(rep.equals("o") && rep.equals("n")){
@@ -170,12 +169,12 @@ public class Covoiturage {
 			connecte.addTrajet(courant);
 		}
 	}
-	public void devCreationTrajetACChauffeur(String d,String villeD,String villeA,int heure,Passager p) throws ParseException{
+	public void devCreationTrajetACChauffeur(String d,String villeD,String villeA,String heure,Passager p) throws ParseException{
 		Trajet t =new Trajet(d,villeD,villeA,heure,p);
 		trajets.add(t);
 		p.addTrajet(t);
 	}
-	public void devCreationTrajetSSChauffeur(String d,String villeD,String villeA,int heure) throws ParseException{
+	public void devCreationTrajetSSChauffeur(String d,String villeD,String villeA,String heure) throws ParseException{
 		Trajet t =new Trajet(d,villeD,villeA,heure);
 		trajets.add(t);
 	}
