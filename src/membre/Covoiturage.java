@@ -250,10 +250,66 @@ public class Covoiturage {
 		}
 	}
 	public void annulerTrajet(){
+		System.out.println("Entrez le numéro du Trajet que vous voulez supprimer.");
+		System.out.println("Pour annuler taper 0");
+		System.out.println("(ATTENTION Tout ceux qui était inscrit a votre Trajet recevront un message de suppression)\n");
 		
+		System.out.print("Votre choix : ");
+		int reponse= sc.nextInt();
+		sc.nextLine();
+		System.out.println();
+		
+		if (reponse>0){
+			while (reponse>connecte.nbDeTrajets() && reponse>0){
+				System.out.println("Ce trajet n'existe pas.");
+				System.out.print("Votre choix : ");
+				reponse= sc.nextInt();
+				sc.nextLine();
+				System.out.println();
+			}
+			if (reponse>0){
+				if (connecte.trajetA(reponse-1).getChauffeur().getPseudo().equals(connecte.getPseudo())){
+					envoyerMessageSuppression(connecte.trajetA(reponse-1));
+					connecte.supprimerTrajet(connecte.trajetA(reponse-1));
+					System.out.println("Le trajet "+ reponse+" a été supprimé.");
+				} else {
+					System.out.println("Vous etes passager. \nUtiliser l'option 'Se desinscrire'.");
+				}
+				
+			}	
+		}
+	}
+	public void envoyerMessageSuppression(Trajet t){
+		List<Passager> inscrit = t.getInscrit();
+		for (int i=0; i<inscrit.size(); i++){
+			inscrit.get(i).ajouterMessage(t.toStringNotif());
+		}
 	}
 	public void desinscriptionTrajet(){
+		System.out.println("Entrez le numéro du Trajet dont vous voulez vous desinscrire.");
+		System.out.println("Pour annuler taper 0");
 		
+		System.out.print("Votre choix : ");
+		int reponse= sc.nextInt();
+		sc.nextLine();
+		System.out.println();
+		
+		if (reponse>0){
+			while (reponse>connecte.nbDeTrajets() && reponse>0){
+				System.out.println("Ce trajet n'existe pas.");
+				System.out.print("Votre choix : ");
+				reponse= sc.nextInt();
+				sc.nextLine();
+				System.out.println();
+			}
+			if (reponse>0){
+				if (!connecte.trajetA(reponse-1).getChauffeur().getPseudo().equals(connecte.getPseudo())){
+					connecte.trajetA(reponse-1).enleverParticipant(connecte);
+				} else {
+					System.out.println("Vous etes le conducteur. \nPour supprimer utiliser l'option 'Annuler Trajet'.");
+				}
+			}	
+		}
 	}
 	
 	public void menuPrincipal() throws ParseException{

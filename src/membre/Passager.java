@@ -14,7 +14,6 @@ public class Passager {
 	private String message="";
 	
 	private List<Trajet> mesTrajets= new ArrayList<Trajet>();
-	
 	private List<Voiture> voitures = new ArrayList<Voiture>();
 	
 	public Passager (String pseudo,String nom, String prenom, String email,String telephone,String mdp){
@@ -25,6 +24,13 @@ public class Passager {
 		this.telephone = telephone;
 		this.mdp=mdp;
 		
+	}
+	public int nbDeTrajets(){
+		return mesTrajets.size();
+	}
+	
+	public Trajet trajetA(int index){
+		return mesTrajets.get(index);
 	}
 	
 	public void addTrajet(Trajet t){
@@ -40,9 +46,12 @@ public class Passager {
 		
 		mesTrajets.add(t);
 	}
+	public void ajouterMessage(String m){
+		message=message+m;
+	}
 	
 	public void supprimerTrajet(Trajet t){
-		
+		mesTrajets.remove(t);
 	}
 	
 	public boolean equals(Passager p){

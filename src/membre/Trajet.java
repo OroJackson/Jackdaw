@@ -132,6 +132,15 @@ public class Trajet{
 		return affichage;
 	}
 	
+	public String toStringNotif(){
+		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annulé.";
+	}
+	
+	public void enleverParticipant(Passager p){
+		inscrit.remove(p);
+	}
+	
+	
 	public DatePerso getDateTrajet() {
 		return dateTrajet;
 	}
