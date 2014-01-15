@@ -107,6 +107,18 @@ public class Passager {
 	public String toString (){
 		return "Pseudo : " + pseudo + "\n Nom : "+ nom +"\n Pr��nom : "+ prenom +"\n Email : "+ email +"\n T��l��phone : "+ telephone;
 	}
+	
+	public String afficherVoitures(){
+		if (voitures.size()==0){
+			return "Vous n'avez aucune voiture";
+		} else {
+			String affichage ="";
+			for (int i=0; i<voitures.size();i++){
+				affichage=affichage+voitures.get(i).toString();
+			}
+			return affichage;
+		}
+	}
 
 	public String getMdp() {
 		return mdp;

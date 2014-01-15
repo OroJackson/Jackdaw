@@ -18,9 +18,10 @@ public class Covoiturage {
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
-		devCreationTrajetACChauffeur("12:13:2014","test1","test1",1700,tmp);
-		devCreationTrajetACChauffeur("12:13:2014","test2","test3",1700,tmp);
-		devCreationTrajetACChauffeur("12:13:2014","test3","test4",1700,tmp);
+	
+		//devCreationTrajetACChauffeur("12:13:2014","test1","test1",1700,tmp);
+		//devCreationTrajetACChauffeur("12:13:2014","test2","test3",1700,tmp);
+		//devCreationTrajetACChauffeur("12:13:2014","test3","test4",1700,tmp);
 	}
 	
 	private Scanner sc= new Scanner (System.in);
@@ -60,11 +61,11 @@ public class Covoiturage {
 	 * @return false si la connexion c'est bien passé,True sinon.
 	 */
 	public boolean connexion(){
-		System.out.println("Identifiant :");
+		System.out.print("Identifiant : ");
 		String pseudo= sc.nextLine();
-		System.out.println("Mot de passe :");
+		System.out.print("Mot de passe : ");
 		String mdp = sc.nextLine();
-		
+		System.out.println();
 
 		for (int i=0;i<membres.size();i++){
 			if(membres.get(i).pseudo.equals(pseudo) && membres.get(i).getMdp().equals(mdp)){
@@ -105,7 +106,8 @@ public class Covoiturage {
 		
 		System.out.println("Bienvenue sur le Jackdaw.\n");
 		System.out.println("1. Connexion");
-		System.out.println("2. S'inscrire\n");
+		System.out.println("2. S'inscrire");
+		System.out.println("\n3.Quitter.\n");
 		System.out.print("Votre choix :");
 		
 		int reponse = sc.nextInt();
@@ -184,29 +186,37 @@ public class Covoiturage {
 	public void monProfil(){
 		System.out.println(connecte);
 		System.out.println("Souhaitez vous :");
-		System.out.println("1. Ajouter une voiture");
-		System.out.println("2. Supprimer une voiture");
-		System.out.println("3. Modifier votre mot de passe");
+		System.out.println("1. Voir vos voitures.");
+		System.out.println("2. Ajouter une voiture");
+		System.out.println("3. Supprimer une voiture");
+		System.out.println("4. Modifier votre mot de passe");
+		System.out.println("\nVotre choix : ");
 		int rep=sc.nextInt();
+		System.out.println();
+		
 		sc.nextLine();
 		switch(rep){
 		case 1:
-			ajoutVoiture(connecte);
+			connecte.afficherVoitures();
 			break;
 		case 2:
-			supprimerVoiture();
+			ajoutVoiture(connecte);
 			break;
 		case 3:
+			supprimerVoiture();
+			break;
+		case 4:
 			changeMdp();
 			break;
 		}
 	}
 	private void changeMdp() {
-		System.out.println("Quelle est votre mot de passe actuel:");
+		System.out.print("Quelle est votre mot de passe actuel: ");
 		String rep=sc.nextLine();
 		if(rep.equals(connecte.getMdp())){
-			System.out.println("Entrez un nouveau mot de passe:");
+			System.out.print("\nEntrez un nouveau mot de passe: ");
 			rep=sc.nextLine();
+			System.out.println();
 			connecte.setMdp(rep);
 		}
 	}
@@ -222,7 +232,9 @@ public class Covoiturage {
 		System.out.println("3. Mes trajets.");
 		System.out.println("4. Mon profil.");
 		System.out.println("5. Déconnexion.");
+		System.out.println("\nVotre choix : ");
 		int rep=sc.nextInt();
+		System.out.println();
 		sc.nextLine();
 		switch(rep){
 		case 1:
@@ -239,6 +251,8 @@ public class Covoiturage {
 			break;
 		case 5:
 			System.out.println("Aurevoir "+connecte.getPrenom());
+			connecte=null;
+			break;
 		}
 		
 	}
