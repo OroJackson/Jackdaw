@@ -23,12 +23,12 @@ public class DatePerso extends GregorianCalendar{
 	}
 	
 	public String toStringHeure(){
-		DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 		return dateFormat.format(this.getTime());
 	}
 	
 	public void setHeureDepart(String heureT) throws ParseException{
-		SimpleDateFormat format =new SimpleDateFormat ("hh:mm");
+		SimpleDateFormat format =new SimpleDateFormat ("HH:mm");
 		Date heure = format.parse(heureT);
 		setTime(heure);
 	}

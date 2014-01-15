@@ -11,7 +11,7 @@ import java.text.*;
  * @version 1.0
  */
 public class Trajet{
-	protected DatePerso dateTrajet;
+	protected DatePerso dateTrajet=new DatePerso();
 	protected String villeDepart;
 	protected String villeArrivee;
 	protected int heureDepart;
@@ -28,12 +28,12 @@ public class Trajet{
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
 	 */
-	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart) throws ParseException{
+	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart) throws ParseException{
 
 		this.dateTrajet.toDate(dateT);
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
-		this.heureDepart=heureDepart;
+		this.dateTrajet.setHeureDepart(heureDepart);
 		inscrit = new ArrayList<Passager>();
 	}
 	
@@ -48,18 +48,15 @@ public class Trajet{
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
 	 */
-	public Trajet(String dateT,String villeDepart,String villeArrivee,int heureDepart,Passager chauffeur) throws ParseException{
-		SimpleDateFormat format =new SimpleDateFormat ("dd:MM:yyyy");
-		Date date = format.parse(dateT);
-		GregorianCalendar dateTrajet = new DatePerso();
-		dateTrajet.setTime(date);
-		this.dateTrajet=(DatePerso) dateTrajet;
+	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart,Passager Chauffeur) throws ParseException{
+
+		this.dateTrajet.toDate(dateT);
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
-		this.heureDepart=heureDepart;
+		this.dateTrajet.setHeureDepart(heureDepart);
 		this.chauffeur=chauffeur;
 		inscrit = new ArrayList<Passager>();
-
+		
 	}
 
 /**
@@ -118,7 +115,7 @@ public class Trajet{
 	}	
 	
 	public String toString(){
-		String affichage="Date: "+ dateTrajet.toString() +"\n"+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
+		String affichage="Date: "+ dateTrajet.toStringDate() +"\n"+"Heure: "+dateTrajet.toStringHeure()+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
 				if(chauffeur==null){
 					affichage+="   Chauffeur: Aucun\n";
 					affichage+="   En attente d'un chauffeur";
