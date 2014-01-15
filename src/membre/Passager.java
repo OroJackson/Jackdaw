@@ -115,7 +115,7 @@ public class Passager {
 	}
 	
 	public String toString (){
-		return "Pseudo : " + pseudo + "\n Nom : "+ nom +"\n Pr��nom : "+ prenom +"\n Email : "+ email +"\n T��l��phone : "+ telephone;
+		return "  Pseudo : " + pseudo + "\n  Nom : "+ nom +"\n  Prénom : "+ prenom +"\n  Email : "+ email +"\n  Téléphone : "+ telephone;
 	}
 	
 	public String afficherVoitures(){

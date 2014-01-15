@@ -103,16 +103,17 @@ public class Covoiturage {
 	 * @return Le numéro de la répond : 1 pour connexion ou 2 pour inscription.
 	 */
 	public int menuConnexion(){
-		
+		System.out.println("--------------------------");
 		System.out.println("Bienvenue sur le Jackdaw.\n");
 		System.out.println("1. Connexion");
 		System.out.println("2. S'inscrire");
 		System.out.println("\n3.Quitter.\n");
-		System.out.print("Votre choix :");
+		System.out.print("Votre choix : ");
 		
 		int reponse = sc.nextInt();
 		sc.nextLine();
 		System.out.println();
+		System.out.println("--------------------------");
 
 		return reponse;
 	}
@@ -179,14 +180,32 @@ public class Covoiturage {
 		trajets.add(t);
 	}
 	public void chercherTrajet(){
+		System.out.print("Entrez la ville de départ : ");
+		String villeD = sc.nextLine();
+		System.out.println();
 		
+		List<Trajet> trajetsRecherche =chercherTrajetAvecVilleDepart(villeD);
+		if (trajetsRecherche.size()==0){
+			System.out.println("Aucun trajet ne correspond à votre demande.");
+		} else {
+			for (int i=0; i<trajetsRecherche.size(); i++){
+				System.out.println((i+1) +" "+trajetsRecherche);
+			}
+		}
 	}
-	public void mesTrajets(){
-		
+	public List<Trajet> chercherTrajetAvecVilleDepart(String villeD){
+		List<Trajet> trajetsRecherche = new ArrayList<Trajet>();
+		for (int i=0; i<trajets.size(); i++){
+			if (trajets.get(i).getVilleDepart().equals(villeD)){
+				trajetsRecherche.add(trajets.get(i));
+			}
+		}
+		return trajetsRecherche;
 	}
+	
 	public void monProfil(){
 		System.out.println(connecte);
-		System.out.println("Souhaitez vous :");
+		System.out.println("\nSouhaitez vous :");
 		System.out.println("1. Voir vos voitures.");
 		System.out.println("2. Ajouter une voiture");
 		System.out.println("3. Supprimer une voiture");
