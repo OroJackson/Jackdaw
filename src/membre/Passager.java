@@ -144,21 +144,21 @@ public class Passager {
 	
 	public void afficherMesTrajets(){
 		if (mesTrajets.size()==0) {
-			System.out.println("Vous n'avez aucun trajet.");
+			System.out.println("Vous n'avez aucun trajet.\n");
 		}
 		for (int i=0; i<mesTrajets.size(); i++){
-			System.out.println((i+1)+"  "+mesTrajets.get(i).toString());	
+			System.out.print((i+1)+"  "+mesTrajets.get(i).toString());	
 			if (mesTrajets.get(i).estPlein()==-1){
 				System.out.print("(Trajet en attente d'un conducteur)");
 			}else{
 				if (mesTrajets.get(i).getChauffeur().equals(this)){
-					System.out.print(" (Vous etes le conducteur) ");
+					System.out.print("(Vous etes le conducteur) ");
 				}
 			}
 			if (mesTrajets.get(i).estPlein()==1){
 				System.out.print(" (Trajet Plein) ");
 			}
-			System.out.println();
+			System.out.println("\n");
 		}
 	}
 
