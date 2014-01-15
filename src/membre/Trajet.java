@@ -121,13 +121,13 @@ public class Trajet{
 	}	
 	
 	public String toString(){
-		String affichage="Date: "+ dateTrajet.toString() +"\n"+"Depart: "+villeDepart+"\n"+"Arrivee: "+villeArrivee+"\n";
+		String affichage="Date: "+ dateTrajet.toString() +"\n"+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
 				if(chauffeur==null){
-					affichage+="Chauffeur: Aucun\n";
-					affichage+="En attente d'un chauffeur";
+					affichage+="   Chauffeur: Aucun\n";
+					affichage+="   En attente d'un chauffeur";
 				}else{
-					affichage+="chauffeur: "+chauffeur.getPseudo()+"\n";
-					affichage+="Nombre de Place restante(s): "+nbPlaceRestante()+"\n";
+					affichage+="   Chauffeur: "+chauffeur.getPseudo()+"\n";
+					affichage+="   Nombre de Place restante(s): "+nbPlaceRestante()+"\n";
 				}
 		return affichage;
 	}

@@ -11,7 +11,7 @@ public class Passager {
 	private String email;
 	private String telephone;
 	private String mdp;
-	private String message;
+	private String message="";
 	
 	private List<Trajet> mesTrajets= new ArrayList<Trajet>();
 	
@@ -149,10 +149,10 @@ public class Passager {
 		for (int i=0; i<mesTrajets.size(); i++){
 			System.out.print((i+1)+"  "+mesTrajets.get(i).toString());	
 			if (mesTrajets.get(i).estPlein()==-1){
-				System.out.print("(Trajet en attente d'un conducteur)");
+				System.out.print("   (Trajet en attente d'un conducteur)");
 			}else{
 				if (mesTrajets.get(i).getChauffeur().equals(this)){
-					System.out.print("(Vous etes le conducteur) ");
+					System.out.print("   (Vous etes le conducteur) ");
 				}
 			}
 			if (mesTrajets.get(i).estPlein()==1){

@@ -149,7 +149,7 @@ public class Covoiturage {
 		String villeDepart=sc.nextLine();
 		System.out.println("Ville d'arrivee?");
 		String villeArrivee=sc.nextLine();
-		System.out.println("Heure de depart du trajet ?(HHMM");
+		System.out.println("Heure de depart du trajet ?(HHMM)");
 		int heureDepart=sc.nextInt();
 		sc.nextLine();
 		System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
@@ -166,6 +166,7 @@ public class Covoiturage {
 			Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart);
 			courant.addParticipant(connecte);
 			trajets.add(courant);
+			connecte.addTrajet(courant);
 		}
 	}
 	public void devCreationTrajetACChauffeur(String d,String villeD,String villeA,int heure,Passager p) throws ParseException{
@@ -225,16 +226,48 @@ public class Covoiturage {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public void menuTrajet(){
+		System.out.println("--------------------------");
+		System.out.println("1. Annuler un trajet. (Conducteur)");
+		System.out.println("2. Se desinscrire. (Passager)\n");
+		System.out.println("3. Retour.\n");
+		
+		System.out.print("Votre choix : ");
+		
+		int reponse = sc.nextInt();
+		sc.nextLine();
+		System.out.println();
+		
+		switch(reponse){
+		case 1 :
+			annulerTrajet();
+			break;
+		case 2 : 
+			desinscriptionTrajet();
+			break;
+		case 3 :
+			break;
+		}
+	}
+	public void annulerTrajet(){
+		
+	}
+	public void desinscriptionTrajet(){
+		
+	}
+	
 	public void menuPrincipal() throws ParseException{
+		System.out.println("--------------------------");
 		System.out.println("1. Creer un trajet.");
 		System.out.println("2. Chercher un trajet.");
 		System.out.println("3. Mes trajets.");
 		System.out.println("4. Mon profil.");
 		System.out.println("5. Déconnexion.");
-		System.out.println("\nVotre choix : ");
+		System.out.print("\nVotre choix : ");
 		int rep=sc.nextInt();
 		System.out.println();
+		System.out.println("--------------------------");
+
 		sc.nextLine();
 		switch(rep){
 		case 1:
@@ -245,6 +278,7 @@ public class Covoiturage {
 			break;
 		case 3:
 			connecte.afficherMesTrajets();
+			menuTrajet();
 			break;
 		case 4:
 			monProfil();
