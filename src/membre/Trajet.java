@@ -140,6 +140,18 @@ public class Trajet{
 		inscrit.remove(p);
 	}
 	
+	public boolean estUnParticipant(Passager p){
+		for(int i=0; i<inscrit.size(); i++){
+			if (inscrit.get(i).getPseudo().equals(p)){
+				return true;
+			} 
+		}
+		return false;
+	}
+	
+	public boolean estLeConducteur(Passager p){
+		return chauffeur.getPseudo().equals(p);
+	}
 	
 	public DatePerso getDateTrajet() {
 		return dateTrajet;
