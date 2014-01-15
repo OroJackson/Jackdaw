@@ -35,8 +35,9 @@ public class Passager {
 				mesTrajets.add(i,t);
 				i+=mesTrajets.size();
 			}
+			i++;
 		}
-		i++;
+		
 		mesTrajets.add(t);
 	}
 	
