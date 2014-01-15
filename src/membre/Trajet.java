@@ -22,9 +22,9 @@ public class Trajet{
 	/**
 	 * Constructeur de Trajet n'initialisant pas le Chauffeur du trajet(Trajet en attente d'un chauffeur)
 	 * 
-	 * @param dateTrajet , date du trajet propos��
+	 * @param dateTrajet , date du trajet propos������
 	 * @param villeDepart , ville de depart du trajet
-	 * @param villeArrivee , ville d'arriv��e du trajet
+	 * @param villeArrivee , ville d'arriv������e du trajet
 	 * @param heureDepart  , heure de depart du trajet
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
@@ -48,11 +48,11 @@ public class Trajet{
 	}
 	
 	/**
-	 * Constructeur initialisant le chauffeur du trajet(Trajet cr��e par un conducteur)
+	 * Constructeur initialisant le chauffeur du trajet(Trajet cr������e par un conducteur)
 	 * 
-	 * @param dateTrajet , date du trajet propos��
+	 * @param dateTrajet , date du trajet propos������
 	 * @param villeDepart , ville de depart du trajet
-	 * @param villeArrivee , ville d'arriv��e du trajet
+	 * @param villeArrivee , ville d'arriv������e du trajet
 	 * @param heureDepart  , heure de depart du trajet
 	 * @param chauffeur , passager du trajet qui sera conducteur et donc qui fourni la voiture
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
@@ -99,7 +99,7 @@ public class Trajet{
 /**
  * Methode permettant d'ajouter un passager a un trajet
  * @param p : instance de passager a ajouter au trajet
- * @return un booleen vrai si le trajet n'��tait pas plein, faux si il etait plein
+ * @return un booleen vrai si le trajet n'������tait pas plein, faux si il etait plein
  */
 	public boolean addParticipant(Passager p){
 		if(this.estPlein()==0){
@@ -136,8 +136,12 @@ public class Trajet{
 		return affichage;
 	}
 	
+	public void addConducteur(Passager p){
+		chauffeur=p;
+	}
+	
 	public String toStringNotif(){
-		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annulé.";
+		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annul��.";
 	}
 	
 	public void enleverParticipant(Passager p){

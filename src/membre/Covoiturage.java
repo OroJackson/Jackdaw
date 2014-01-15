@@ -191,6 +191,56 @@ public class Covoiturage {
 			for (int i=0; i<trajetsRecherche.size(); i++){
 				System.out.println((i+1) +" "+trajetsRecherche);
 			}
+			menuTrajetRecherche(trajetsRecherche);
+		}
+	}
+	public void menuTrajetRecherche(List<Trajet> trajetsRecherche){
+		System.out.println("1. S'inscrire à un trajet.");
+		System.out.println("2. Retour.");
+		System.out.print("Votre choix : ");
+		int reponse = sc.nextInt();
+		sc.nextLine();
+		System.out.println();
+		
+		if (reponse==1){
+			System.out.println("(Taper 0 pour quitter)");
+			System.out.println("Numéro du trajet : ");
+			System.out.print("Votre choix : ");
+			reponse = sc.nextInt();
+			sc.nextLine();
+			System.out.println();
+			while (reponse<0 || reponse >trajetsRecherche.size()){
+				System.out.println("Ce trajet n'existe pas.");
+				System.out.print("Votre choix : ");
+				reponse = sc.nextInt();
+				sc.nextLine();
+				System.out.println();
+			}
+			if (reponse!=0){
+				boolean conducteur=false;
+				Trajet courant= trajetsRecherche.get(reponse-1);
+				if (courant.estUnParticipant(connecte) || courant.estLeConducteur(connecte)){
+					System.out.println("Vous etes déjà inscrit à ce trajet.");
+				} else if (courant.estPlein()==1){
+					System.out.println("Le trajet est plein.");
+				} else {
+					if(!courant.aUnConducteur() && connecte.estUnConducteur()){
+						System.out.println("Voulez-vous vous incrire en tant que conducteur ?(o/n)");
+						String choix =sc.nextLine();
+						if (choix.equals("o")){
+							conducteur=true;
+						} 
+					} 
+					if (conducteur){
+						courant.addConducteur(connecte);
+						connecte.addTrajet(courant);
+					} else {
+						courant.addParticipant(connecte);
+						connecte.addTrajet(courant);
+					}
+					System.out.println("Vous étes inscrit à ce trajet.");
+				}
+			}
 		}
 	}
 	public List<Trajet> chercherTrajetAvecVilleDepart(String villeD){
