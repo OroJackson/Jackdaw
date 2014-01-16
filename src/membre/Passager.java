@@ -40,17 +40,20 @@ public class Passager {
 	}
 	
 	public void addTrajet(Trajet t){
+		boolean ajouter=false;
 		int i=0;
 		while(i<mesTrajets.size()){
 
 			if (t.getDateTrajet().compareTo(mesTrajets.get(i).getDateTrajet())<0){
 				mesTrajets.add(i,t);
+				ajouter=true;
 				i+=mesTrajets.size();
 			}
 			i++;
 		}
-		
-		mesTrajets.add(t);
+		if(!ajouter){
+			mesTrajets.add(t);
+		}
 	}
 	public void ajouterMessage(String m){
 		message=message+m+"\n";

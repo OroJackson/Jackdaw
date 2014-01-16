@@ -12,7 +12,7 @@ import java.util.*;
 public class Covoiturage {
 	private List<Trajet> trajets = new ArrayList<Trajet>();
 	private List<Passager> membres = new ArrayList<Passager>();
-	private HashMap<String,String> pseudoMdp = new HashMap<String,String>();
+	private HashMap<String,Passager> pseudoMdp = new HashMap<String,Passager>();
 	private Set<String> pseudos = new HashSet<String>();
 	Passager connecte;
 	
@@ -21,16 +21,16 @@ public class Covoiturage {
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
 		pseudos.add(tmp.pseudo);
-		pseudoMdp.put(tmp.getPseudo(), tmp.getMdp());
+		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp.ajouterVoiture(new Voiture("Ferrari","Rouge",5,1));
 		tmp= new Passager("Dashell","Galas","Alain","galasx@gmail.com",null,"mdp");
 		membres.add(tmp);
 		pseudos.add(tmp.pseudo);
-		pseudoMdp.put(tmp.getPseudo(), tmp.getMdp());
+		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp= new Passager("Aurie","Digeon","Aurélie","aurelie.digeon@gmail.com",null,"mdp");
 		membres.add(tmp);
 		pseudos.add(tmp.pseudo);
-		pseudoMdp.put(tmp.getPseudo(), tmp.getMdp());
+		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
 		devCreationTrajetACChauffeur("12:13:2014","test1","test1","18:00",tmp);
@@ -66,7 +66,7 @@ public class Covoiturage {
 		Passager p=new Passager(pseudo,nom,prenom,email,telephone,mdp);
 		membres.add(p);
 		pseudos.add(p.getPseudo());
-		pseudoMdp.put(p.getPseudo(), p.getMdp());
+		pseudoMdp.put(p.getPseudo(), p);
 	
 		// Verifier la validité de l'email
 		// Verifier téléphone
@@ -91,7 +91,12 @@ public class Covoiturage {
 		String mdp = sc.nextLine();
 		System.out.println();
 		
-		return (pseudoMdp.get(pseudo).equals(mdp));
+		if(pseudos.contains(pseudo) && pseudoMdp.get(pseudo).getMdp().equals(mdp)){
+			connecte=pseudoMdp.get(pseudo);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	/**
 	 * Méthode donnant le choix a l'utilisateur de réésayer la connexion ou de revenir au Menu
