@@ -359,7 +359,8 @@ public class Covoiturage implements java.io.Serializable{
 		System.out.println("1. Voir vos voitures.");
 		System.out.println("2. Ajouter une voiture");
 		System.out.println("3. Supprimer une voiture");
-		System.out.println("4. Modifier votre mot de passe");
+		System.out.println("4. Choisir voiture principal.");
+		System.out.println("5. Modifier votre mot de passe");
 		System.out.println("\nVotre choix : ");
 		int rep=sc.nextInt();
 		System.out.println();
@@ -367,7 +368,7 @@ public class Covoiturage implements java.io.Serializable{
 		sc.nextLine();
 		switch(rep){
 		case 1:
-			connecte.afficherVoitures();
+			System.out.println(connecte.afficherVoitures());
 			break;
 		case 2:
 			ajoutVoiture(connecte);
@@ -375,9 +376,32 @@ public class Covoiturage implements java.io.Serializable{
 		case 3:
 			supprimerVoiture();
 			break;
-		case 4:
+		case 4 :
+			choisirVoiturePrincipal();
+			break;
+		case 5:
 			changeMdp();
 			break;
+		}
+	}
+	private void choisirVoiturePrincipal() {
+		System.out.println(connecte.afficherVoitures());
+		if (connecte.nbVoitures()!=0){
+			System.out.println("\n(Pour annuler taper 0)");
+			System.out.print("Entrez le numéro de la voiture principale:");
+			int reponse = sc.nextInt();
+			sc.nextLine();
+			while (reponse<0 || reponse>connecte.nbVoitures()){
+				System.out.println("Ce numéro ne correspond pas à une de vos voitures.");
+				System.out.println("Numéro de la voiture : ");
+				reponse = sc.nextInt();
+				sc.nextLine();
+			
+			}
+			if (reponse!=0){
+				connecte.setVoiturePrincipale(connecte.getVoitures().get(reponse-1));
+				System.out.println("Voiture "+ reponse+" est maintenant votre voiture principal.");
+			}
 		}
 	}
 	/**
@@ -400,12 +424,22 @@ public class Covoiturage implements java.io.Serializable{
 	 * Méthode supprimant une voiture de l'utilisateur connecté : il lui affiche d'abord toutes ses voitures puis lui demande laquelle il veut supprimer.
 	 */
 	private void supprimerVoiture() {
-		List<Voiture> voitures=connecte.getVoitures();
-		if (voitures.size()==0) {
-			System.out.println("Vous n'avez pas de voiture.");
-		} else {
-			for (int i=0; i<connecte.nbVoitures();i++){
-				System.out.println(voitures.get(i));
+		System.out.println(connecte.afficherVoitures());
+		if (connecte.nbVoitures()!=0){
+			System.out.println("\n(Pour annuler taper 0)");
+			System.out.print("Entrez le numéro de la voiture à supprimer :");
+			int reponse = sc.nextInt();
+			sc.nextLine();
+			while (reponse<0 || reponse>connecte.nbVoitures()){
+				System.out.println("Ce numéro ne correspond pas à une de vos voitures.");
+				System.out.println("Numéro de la voiture à supprimer : ");
+				reponse = sc.nextInt();
+				sc.nextLine();
+			
+			}
+			if (reponse!=0){
+				connecte.supprimerVoiture(connecte.getVoitures().get(reponse-1));
+				System.out.println("Voiture "+ reponse+" à été supprimée.");
 			}
 		}
 	}
@@ -458,7 +492,6 @@ public class Covoiturage implements java.io.Serializable{
 				} else {
 					System.out.println("Vous etes passager. \nUtiliser l'option 'Se desinscrire'.");
 				}
-				
 			}	
 		}
 	}
