@@ -10,7 +10,11 @@ import java.text.*;
  * @author dashell
  * @version 1.0
  */
-public class Trajet{
+public class Trajet implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected DatePerso dateTrajet=new DatePerso();
 	protected String villeDepart;
 	protected String villeArrivee;

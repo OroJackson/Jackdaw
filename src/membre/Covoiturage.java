@@ -1,5 +1,6 @@
 package membre;
 
+
 import java.text.*;
 import java.util.*;
 
@@ -9,7 +10,11 @@ import java.util.*;
  * @author Aurie
  * @version 1.0
  */
-public class Covoiturage {
+public class Covoiturage implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Trajet> trajets = new ArrayList<Trajet>();
 	private List<Passager> membres = new ArrayList<Passager>();
 	private HashMap<String,Passager> pseudoMdp = new HashMap<String,Passager>();
@@ -75,6 +80,11 @@ public class Covoiturage {
 		System.out.println("Vous êtes passager, pour ajouter une voiture, allez dans votre profil");
 		System.out.println("Bon Voyages "+ prenom +"!");
 	}
+	/**
+	 * Fonction vérifiant si le pseudo est unique ou non dans le programme.
+	 * @param pseudo Pseudo dont on souhaite vérifier l'unicité dans le programme.
+	 * @return True si le pseudo est déjà dans le programme, false sinon.
+	 */
 	public boolean verifierUnicite(String pseudo){
 		return pseudos.contains(pseudo);
 	}
@@ -142,6 +152,10 @@ public class Covoiturage {
 		return reponse;
 	}
 	
+	/**
+	 * Méthode destinée à ajouter une voiture dans la liste de voiture d'un passager. Elle lui demande le modele, la couleur, le nombre de place et le confort de la voiture.
+	 * @param p Passager auquel on souhaite ajouter une voiture.
+	 */
 	public void ajoutVoiture(Passager p){
 		
 		System.out.println("Modéle de la voiture :");
@@ -167,6 +181,10 @@ public class Covoiturage {
 		}
 		p.ajouterVoiture(new Voiture(modele,couleur,confort,nbPlaces));
 	}
+	/**
+	 * Méthode permettant de demander a l'utilisateur différent renseignement puis de creer le trajet.
+	 * @throws ParseException
+	 */
 	public void creationTrajet() throws ParseException{
 		System.out.println("Date du Trajet? (JJ:MM:AA)");
 		String dateTrajet =sc.nextLine();
@@ -193,15 +211,36 @@ public class Covoiturage {
 			connecte.addTrajet(courant);
 		}
 	}
+	
+	/**
+	 * Méthode de develloppement pour creer rapidement un trajet avec chauffeur.
+	 * @param d Date du trajet.
+	 * @param villeD Ville de départ du trajet.
+	 * @param villeA Ville d'arrivée du trajet.
+	 * @param heure Heure du départ du trajet.
+	 * @param p Chauffeur du trajet.
+	 * @throws ParseException
+	 */
 	public void devCreationTrajetACChauffeur(String d,String villeD,String villeA,String heure,Passager p) throws ParseException{
 		Trajet t =new Trajet(d,villeD,villeA,heure,p);
 		trajets.add(t);
 		p.addTrajet(t);
 	}
+	/**	 
+	 * Méthode de develloppement pour creer rapidement un trajet sans chauffeur.
+	 * @param d Date du trajet.
+	 * @param villeD Ville de départ du trajet.
+	 * @param villeA Ville d'arrivée du trajet
+	 * @param heure Heure de départ du trajet.
+	 * @throws ParseException
+	 */
 	public void devCreationTrajetSSChauffeur(String d,String villeD,String villeA,String heure) throws ParseException{
 		Trajet t =new Trajet(d,villeD,villeA,heure);
 		trajets.add(t);
 	}
+	/**
+	 * Demande a l'utilisateur une ville de départ et lance la recherche des tout les trajets depuis cette Ville, puis les affiches.
+	 */
 	public void chercherTrajet(){
 		System.out.print("Entrez la ville de départ : ");
 		String villeD = sc.nextLine();
@@ -217,6 +256,10 @@ public class Covoiturage {
 			menuTrajetRecherche(trajetsRecherche);
 		}
 	}
+	/**
+	 * Menu proposant a l'utilisateur de s'inscrire à un des trajets de la liste passée en paramétre ou de retourner au menu principal.
+	 * @param trajetsRecherche Listes des trajets utilisable dans le menu.
+	 */
 	public void menuTrajetRecherche(List<Trajet> trajetsRecherche){
 		System.out.println("1. S'inscrire à un trajet.");
 		System.out.println("2. Retour.");
@@ -266,6 +309,11 @@ public class Covoiturage {
 			}
 		}
 	}
+	/**
+	 * Recherche les trajets ayant pour ville de départ VilleD.
+	 * @param villeD Ville de départ dont on cherche tout les trajets.
+	 * @return Une liste de tout les trajets ayant comme ville de départ villeD.
+	 */
 	public List<Trajet> chercherTrajetAvecVilleDepart(String villeD){
 		List<Trajet> trajetsRecherche = new ArrayList<Trajet>();
 		for (int i=0; i<trajets.size(); i++){
@@ -276,6 +324,9 @@ public class Covoiturage {
 		return trajetsRecherche;
 	}
 	
+	/**
+	 * Affiche le profil de l'utilisateur connecté. Puis propose à l'utilisateur de voir ses voitures, d'ajouter une voiture, d'en supprimer une, de modifier son mot de passe ou de revenir au menu principal.
+	 */
 	public void monProfil(){
 		System.out.println(connecte);
 		System.out.println("\nSouhaitez vous :");
@@ -303,6 +354,9 @@ public class Covoiturage {
 			break;
 		}
 	}
+	/**
+	 * Méthode servant à changer le mot de passe de l'utilisateur connecté. Il lui demande d'abord son ancien mdp puis le nouveau.
+	 */
 	private void changeMdp() {
 		System.out.print("Quelle est votre mot de passe actuel: ");
 		String rep=sc.nextLine();
@@ -311,12 +365,23 @@ public class Covoiturage {
 			rep=sc.nextLine();
 			System.out.println();
 			connecte.setMdp(rep);
+		} else {
+			System.out.println("Mot de passe incorrect.");
 		}
 	}
 
+	/**
+	 * Méthode supprimant une voiture de l'utilisateur connecté : il lui affiche d'abord toutes ses voitures puis lui demande laquelle il veut supprimer.
+	 */
 	private void supprimerVoiture() {
-		// TODO Auto-generated method stub
-		
+		List<Voiture> voitures=connecte.getVoitures();
+		if (voitures.size()==0) {
+			System.out.println("Vous n'avez pas de voiture.");
+		} else {
+			for (int i=0; i<connecte.nbVoitures();i++){
+				System.out.println(voitures.get(i));
+			}
+		}
 	}
 	public void menuTrajet(){
 		System.out.println("--------------------------");
@@ -443,6 +508,5 @@ public class Covoiturage {
 			connecte=null;
 			break;
 		}
-		
 	}
 }
