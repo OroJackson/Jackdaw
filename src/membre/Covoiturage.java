@@ -12,16 +12,25 @@ import java.util.*;
 public class Covoiturage {
 	private List<Trajet> trajets = new ArrayList<Trajet>();
 	private List<Passager> membres = new ArrayList<Passager>();
+	private HashMap<String,String> pseudoMdp = new HashMap<String,String>();
+	private Set<String> pseudos = new HashSet<String>();
 	Passager connecte;
+	
 	
 	public Covoiturage() throws ParseException{
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
+		pseudos.add(tmp.pseudo);
+		pseudoMdp.put(tmp.getPseudo(), tmp.getMdp());
 		tmp.ajouterVoiture(new Voiture("Ferrari","Rouge",5,1));
 		tmp= new Passager("Dashell","Galas","Alain","galasx@gmail.com",null,"mdp");
 		membres.add(tmp);
+		pseudos.add(tmp.pseudo);
+		pseudoMdp.put(tmp.getPseudo(), tmp.getMdp());
 		tmp= new Passager("Aurie","Digeon","Aurélie","aurelie.digeon@gmail.com",null,"mdp");
 		membres.add(tmp);
+		pseudos.add(tmp.pseudo);
+		pseudoMdp.put(tmp.getPseudo(), tmp.getMdp());
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
 		devCreationTrajetACChauffeur("12:13:2014","test1","test1","17:00",tmp);
@@ -35,9 +44,14 @@ public class Covoiturage {
 	 */
 	public void inscription (){
 		
-		System.out.print("Pseudo :");
-		String pseudo=sc.nextLine();
-		// VERIFIER UNICITÉ	
+		String pseudo="";
+		do {
+			System.out.print("Pseudo :");
+			pseudo=sc.nextLine();
+			if (!verifierUnicite(pseudo)){
+				System.out.println("Ce pseudo est déjà utilisé.");
+			}
+		} while (!verifierUnicite(pseudo));
 		System.out.print("Mot de Passe :");
 		String mdp=sc.nextLine();
 		System.out.print("Nom :");
@@ -51,6 +65,8 @@ public class Covoiturage {
 		
 		Passager p=new Passager(pseudo,nom,prenom,email,telephone,mdp);
 		membres.add(p);
+		pseudos.add(p.getPseudo());
+		pseudoMdp.put(p.getPseudo(), p.getMdp());
 	
 		// Verifier la validité de l'email
 		// Verifier téléphone
@@ -58,6 +74,9 @@ public class Covoiturage {
 		System.out.println("\nVous voilà inscript sur le Jackdaw !");
 		System.out.println("Vous êtes passager, pour ajouter une voiture, allez dans votre profil");
 		System.out.println("Bon Voyages "+ prenom +"!");
+	}
+	public boolean verifierUnicite(String pseudo){
+		return pseudo.contains(pseudo);
 	}
 	
 	/**
@@ -71,7 +90,9 @@ public class Covoiturage {
 		System.out.print("Mot de passe : ");
 		String mdp = sc.nextLine();
 		System.out.println();
-
+		
+		
+		
 		for (int i=0;i<membres.size();i++){
 			if(membres.get(i).pseudo.equals(pseudo) && membres.get(i).getMdp().equals(mdp)){
 				connecte=membres.get(i);
