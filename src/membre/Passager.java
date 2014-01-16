@@ -142,7 +142,7 @@ public class Passager implements java.io.Serializable{
 		} else {
 			String affichage ="";
 			for (int i=0; i<voitures.size();i++){
-				affichage=affichage+voitures.get(i).toString();
+				affichage=affichage+""+(i+1)+" "+voitures.get(i).toString();
 			}
 			return affichage;
 		}
