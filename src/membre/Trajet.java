@@ -16,6 +16,7 @@ public class Trajet{
 	protected String villeArrivee;
 	protected int heureDepart;
 	protected Passager chauffeur;
+	protected Voiture voiture;
 	protected List<Passager> inscrit;
 	private Scanner scT;
 
@@ -59,12 +60,12 @@ public class Trajet{
 	 * @throws ParseException 
 	 */
 	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart,Passager chauffeur) throws ParseException{
-
 		this.dateTrajet.toDate(dateT);
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
 		this.dateTrajet.setHeureDepart(heureDepart);
 		this.chauffeur=chauffeur;
+		this.voiture=chauffeur.getVoiture();
 		inscrit = new ArrayList<Passager>();
 		
 	}
@@ -125,12 +126,13 @@ public class Trajet{
 	}	
 	
 	public String toString(){
-		String affichage="Date: "+ dateTrajet.toStringDate() +"\n"+"Heure: "+dateTrajet.toStringHeure()+"\n"+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
+		String affichage="Date: "+ dateTrajet.toStringDate() +"\n"+"   Heure: "+dateTrajet.toStringHeure()+"\n"+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
 				if(chauffeur==null){
 					affichage+="   Chauffeur: Aucun\n";
 					affichage+="   En attente d'un chauffeur";
 				}else{
 					affichage+="   Chauffeur: "+chauffeur.getPseudo()+"\n";
+					affichage+="   Voiture : "+voiture.toStringCourt();
 					affichage+="   Nombre de Place restante(s): "+nbPlaceRestante()+"\n";
 				}
 		return affichage;
@@ -141,7 +143,7 @@ public class Trajet{
 	}
 	
 	public String toStringNotif(){
-		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annul��.";
+		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annulé.";
 	}
 	
 	public void enleverParticipant(Passager p){
@@ -150,7 +152,7 @@ public class Trajet{
 	
 	public boolean estUnParticipant(Passager p){
 		for(int i=0; i<inscrit.size(); i++){
-			if (inscrit.get(i).getPseudo().equals(p)){
+			if (inscrit.get(i).getPseudo().equals(p.getPseudo())){
 				return true;
 			} 
 		}
@@ -158,7 +160,7 @@ public class Trajet{
 	}
 	
 	public boolean estLeConducteur(Passager p){
-		return chauffeur.getPseudo().equals(p);
+		return chauffeur.getPseudo().equals(p.getPseudo());
 	}
 	
 	public DatePerso getDateTrajet() {

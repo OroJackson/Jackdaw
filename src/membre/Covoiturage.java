@@ -17,6 +17,11 @@ public class Covoiturage {
 	public Covoiturage() throws ParseException{
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
+		tmp.ajouterVoiture(new Voiture("Ferrari","Rouge",5,1));
+		tmp= new Passager("Dashell","Galas","Alain","galasx@gmail.com",null,"mdp");
+		membres.add(tmp);
+		tmp= new Passager("Aurie","Digeon","Aurélie","aurelie.digeon@gmail.com",null,"mdp");
+		membres.add(tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
 		devCreationTrajetACChauffeur("12:13:2014","test1","test1","17:00",tmp);
@@ -189,7 +194,7 @@ public class Covoiturage {
 			System.out.println("Aucun trajet ne correspond à votre demande.");
 		} else {
 			for (int i=0; i<trajetsRecherche.size(); i++){
-				System.out.println((i+1) +" "+trajetsRecherche);
+				System.out.println((i+1) +"-"+trajetsRecherche);
 			}
 			menuTrajetRecherche(trajetsRecherche);
 		}
@@ -238,7 +243,7 @@ public class Covoiturage {
 						courant.addParticipant(connecte);
 						connecte.addTrajet(courant);
 					}
-					System.out.println("Vous étes inscrit à ce trajet.");
+					System.out.println("Vous étes maintenant inscrit à ce trajet.");
 				}
 			}
 		}
@@ -383,6 +388,13 @@ public class Covoiturage {
 	
 	public void menuPrincipal() throws ParseException{
 		System.out.println("--------------------------");
+		if (connecte.afficherMessage().equals("")){
+			System.out.println("Vous n'avez pas de nouveau message");
+		} else {
+			System.out.println(connecte.afficherMessage());
+		}
+		System.out.println("--------------------------");
+
 		System.out.println("1. Creer un trajet.");
 		System.out.println("2. Chercher un trajet.");
 		System.out.println("3. Mes trajets.");

@@ -23,7 +23,6 @@ public class Passager {
 		this.email=email;
 		this.telephone = telephone;
 		this.mdp=mdp;
-		
 	}
 	public int nbDeTrajets(){
 		return mesTrajets.size();
@@ -31,6 +30,13 @@ public class Passager {
 	
 	public Trajet trajetA(int index){
 		return mesTrajets.get(index);
+	}
+	
+	public String afficherMessage(){
+		return message;
+	}
+	public void viderMessage(){
+		message="";
 	}
 	
 	public void addTrajet(Trajet t){
@@ -47,7 +53,7 @@ public class Passager {
 		mesTrajets.add(t);
 	}
 	public void ajouterMessage(String m){
-		message=message+m;
+		message=message+m+"\n";
 	}
 	
 	public void supprimerTrajet(Trajet t){
