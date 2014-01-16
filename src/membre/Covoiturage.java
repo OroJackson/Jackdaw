@@ -48,10 +48,10 @@ public class Covoiturage {
 		do {
 			System.out.print("Pseudo :");
 			pseudo=sc.nextLine();
-			if (!verifierUnicite(pseudo)){
+			if (verifierUnicite(pseudo)){
 				System.out.println("Ce pseudo est déjà utilisé.");
 			}
-		} while (!verifierUnicite(pseudo));
+		} while (verifierUnicite(pseudo));
 		System.out.print("Mot de Passe :");
 		String mdp=sc.nextLine();
 		System.out.print("Nom :");
@@ -76,7 +76,7 @@ public class Covoiturage {
 		System.out.println("Bon Voyages "+ prenom +"!");
 	}
 	public boolean verifierUnicite(String pseudo){
-		return pseudo.contains(pseudo);
+		return pseudos.contains(pseudo);
 	}
 	
 	/**
