@@ -59,6 +59,10 @@ public class Voiture implements java.io.Serializable{
 	public int getPlace(){
 		return nbPlaces;
 	}
+	/**
+	 * Permet l'affichage court d'une voiture.
+	 * @return un String contenant le modele, la couleur et le confort de la voiture.
+	 */
 	public String toStringCourt(){
 		return modele + " "+ couleur+" (confort: "+confort+"/5)\n";
 	}

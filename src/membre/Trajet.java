@@ -126,24 +126,45 @@ public class Trajet implements java.io.Serializable{
 				}
 		return affichage;
 	}
+<<<<<<< HEAD
 	/**
 	 * methode permettant l'envoi d'une notification signalant la supression d'un trajet
+=======
+	
+	/**
+	 * Renvoi l'affichage court d'un trajet.
+>>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 * @return
 	 */
 	public String toStringNotif(){
 		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet.toStringDate()+" est annulé.";
 	}
+<<<<<<< HEAD
 	/**
 	 * Methode permettant de retirer un passager inscrit a un trajet
 	 * @param p Pasager supprimer du trajet
+=======
+	
+	/**
+	 * Enléve le participant p de la liste des participant au trjate.
+	 * @param p Participant à enlever de la liste.
+>>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 */
 	public void enleverParticipant(Passager p){
 		inscrit.remove(p);
 	}
+<<<<<<< HEAD
 	/**
 	 * methode permettant de verifier si un Passager est deja un participant d'un trajet
 	 * @param p Passager dont on test la presence dans les inscrit au trajet
 	 * @return vrai si il est deja inscrit faux sinon
+=======
+	
+	/**
+	 * Fonction renvoyant si un Passager est ou n'est pas un participant au trajet.
+	 * @param p Participant à tester
+	 * @return True si p est un participant, false sinon.
+>>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 */
 	public boolean estUnParticipant(Passager p){
 		for(int i=0; i<inscrit.size(); i++){
@@ -154,9 +175,15 @@ public class Trajet implements java.io.Serializable{
 		return false;
 	}
 	/**
+<<<<<<< HEAD
 	 * Methode permettant de savoir si un Passger est le conducteur du trajet
 	 * @param p passager que l'on test comme conducteur d'un trajet
 	 * @return
+=======
+	 * Fonction renvoyant si un Passager est ou n'est pas le conducteur du trajet.
+	 * @param p Participant à tester
+	 * @return True si p est le conducteur, false sinon.
+>>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 */
 	public boolean estLeConducteur(Passager p){
 		return chauffeur.getPseudo().equals(p.getPseudo());

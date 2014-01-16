@@ -38,9 +38,9 @@ public class Covoiturage implements java.io.Serializable{
 		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
-		devCreationTrajetACChauffeur(new DatePerso("12:13:2014"),"test1","test1",tmp);
-		devCreationTrajetACChauffeur(new DatePerso("12:13:2014"),"test2","test3",tmp);
-		devCreationTrajetACChauffeur(new DatePerso("12:13:2014"),"test3","test4",tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test1","test1","18:00",tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test2","test3","17:00",tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test3","test4","17:00",tmp);
 	}
 	
 	private Scanner sc= new Scanner (System.in);
@@ -94,10 +94,20 @@ public class Covoiturage implements java.io.Serializable{
 		System.out.println("Vous êtes passager, pour ajouter une voiture, allez dans votre profil");
 		System.out.println("Bon Voyages "+ prenom +"!");
 	}
+	/**
+	 *Vérifie que le String est bien un numéro de téléphone.(Commence par un 0, 10 chiffres)
+	 * @param telephone String à vérifier
+	 * @return true si c'est correct, false sinon.
+	 */
 	public boolean verifTelephone(String telephone){
 		return telephone.charAt(0)=='0' && isNumeric(telephone) && telephone.length()==10;
 	}
 	
+	/**
+	 * Vérifie qu'un string soit un numérique.
+	 * @param telephone String à vérifier
+	 * @return true si c'est bien un numérique, false sinon.
+	 */
 	public boolean isNumeric(String telephone){  
 	  try  {  
 	    double d = Double.parseDouble(telephone);
@@ -107,6 +117,11 @@ public class Covoiturage implements java.io.Serializable{
 	  return true;  
 	}
 	
+	/**
+	 * Méthode vérifiant que le mail est dans le bon format (au moins un char puis un '@' puis au moins 2 char puis un '.' et enfin 2char).
+	 * @param a Adresse mail à vérifier
+	 * @return true si l'adresse est correct, false sinon.
+	 */
 	public boolean verifMail(String a){
 		boolean valide=false;
 		for(int i=1 ; i<(a.length()) ; i++) {
@@ -225,57 +240,31 @@ public class Covoiturage implements java.io.Serializable{
 	 * @throws ParseException
 	 */
 	public void creationTrajet() throws ParseException{
-		DatePerso dateTrajet = new DatePerso();
-		boolean dateOK=false,heureOK=false;
-		while (!dateOK){
-			System.out.println("Date du Trajet? (JJ:MM:AAAA)");
-			String dateT =sc.nextLine();
-			try{
-				dateTrajet.toDate(dateT);
-				dateOK=true;
-			}catch(ParseException p){
-				p.printStackTrace();
-				System.out.println("\n");
-				dateOK= false;
-				System.out.println("Erreur de saisie pour la Date, veuillez recommencez(JJ:MM:AAAA)");
-			}
+		System.out.println("Date du Trajet? (JJ:MM:AA)");
+		String dateTrajet =sc.nextLine();
+		System.out.println("Ville de depart?");
+		String villeDepart=sc.nextLine();
+		System.out.println("Ville d'arrivee?");
+		String villeArrivee=sc.nextLine();
+		System.out.println("Heure de depart du trajet ?(HH:MM)");
+		String heureDepart=sc.nextLine();
+		System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
+		String rep=sc.nextLine();
+		while(rep.equals("o") && rep.equals("n")){
+			System.out.println("Veuillez repondre par 'o' ou 'n'");
+			rep=sc.nextLine();
 		}
-			System.out.println("Ville de depart?");
-			String villeDepart=sc.nextLine();
-			System.out.println("Ville d'arrivee?");
-			String villeArrivee=sc.nextLine();
-			while (!heureOK){
-				System.out.println("Heure de depart du trajet ?(HH:MM)");
-				String heureD=sc.nextLine();
-				try{
-					dateTrajet.setHeureDepart(heureD);
-					heureOK=true;
-				}catch(ParseException p){
-					//System.err.println(p);
-					p.printStackTrace();
-					heureOK= false;
-					System.out.println("Erreur de saisie pour l'heure, veuillez recommencez(HH:MM)");
-				}
-			}
-
-			System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
-			String rep=sc.nextLine();
-			while(rep.equals("o") && rep.equals("n")){
-				System.out.println("Veuillez repondre par 'o' ou 'n'");
-				rep=sc.nextLine();
-			}
-			if(rep.equals("o")){
-				Trajet courant=new Trajet(dateTrajet,villeDepart,villeArrivee,connecte);
-				trajets.add(courant);
-				connecte.addTrajet(courant);
-			}else{
-				Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee);
-				courant.addParticipant(connecte);
-				trajets.add(courant);
-				connecte.addTrajet(courant);
-			}
+		if(rep.equals("o")){
+			Trajet courant=new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart,connecte);
+			trajets.add(courant);
+			connecte.addTrajet(courant);
+		}else{
+			Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart);
+			courant.addParticipant(connecte);
+			trajets.add(courant);
+			connecte.addTrajet(courant);
 		}
-	
+	}
 	
 	/**
 	 * Méthode de develloppement pour creer rapidement un trajet avec chauffeur.
@@ -285,8 +274,8 @@ public class Covoiturage implements java.io.Serializable{
 	 * @param p Chauffeur du trajet.
 	 * @throws ParseException
 	 */
-	public void devCreationTrajetACChauffeur(DatePerso d,String villeD,String villeA,Passager p) throws ParseException{
-		Trajet t =new Trajet(d,villeD,villeA,p);
+	public void devCreationTrajetACChauffeur(String d,String villeD,String villeA,String heure,Passager p) throws ParseException{
+		Trajet t =new Trajet(d,villeD,villeA,heure,p);
 		trajets.add(t);
 		p.addTrajet(t);
 	}
@@ -297,8 +286,8 @@ public class Covoiturage implements java.io.Serializable{
 	 * @param villeA Ville d'arrivée du trajet
 	 * @throws ParseException
 	 */
-	public void devCreationTrajetSSChauffeur(DatePerso d,String villeD,String villeA) throws ParseException{
-		Trajet t =new Trajet(d,villeD,villeA);
+	public void devCreationTrajetSSChauffeur(String d,String villeD,String villeA,String heure) throws ParseException{
+		Trajet t =new Trajet(d,villeD,villeA,heure);
 		trajets.add(t);
 	}
 	/**
@@ -421,6 +410,9 @@ public class Covoiturage implements java.io.Serializable{
 			break;
 		}
 	}
+	/**
+	 * Méthode affichant d'abord la liste des voitures puis demande à l'utilisateur quel voiture il souhaite choisir en voiture principal et met cette voiture en voiture principal.
+	 */
 	private void choisirVoiturePrincipal() {
 		System.out.println(connecte.afficherVoitures());
 		if (connecte.nbVoitures()!=0){
@@ -480,6 +472,9 @@ public class Covoiturage implements java.io.Serializable{
 			}
 		}
 	}
+	/**
+	 * Méthode demandant à l'utilisateur s'il souhaite annuler un trajet, se desincrire ou retourner au menu précédent.
+	 */
 	public void menuTrajet(){
 		System.out.println("--------------------------");
 		System.out.println("1. Annuler un trajet. (Conducteur)");
@@ -503,6 +498,9 @@ public class Covoiturage implements java.io.Serializable{
 			break;
 		}
 	}
+	/**
+	 * Fonction qui demande à l'utilisateur quel trajet il souhaite annuler et lance l'annulation.
+	 */
 	public void annulerTrajet(){
 		System.out.println("Entrez le numéro du Trajet que vous voulez supprimer.");
 		System.out.println("Pour annuler taper 0");
@@ -532,12 +530,19 @@ public class Covoiturage implements java.io.Serializable{
 			}	
 		}
 	}
+	/**
+	 * Envoi dans la List message de chaque membre un message pour signaler que le trajet est annulé.
+	 * @param t Trajet annulé
+	 */
 	public void envoyerMessageSuppression(Trajet t){
 		List<Passager> inscrit = t.getInscrit();
 		for (int i=0; i<inscrit.size(); i++){
 			inscrit.get(i).ajouterMessage(t.toStringNotif());
 		}
 	}
+	/**
+	 * Demande à l'utilisateur de quel trajet il veut se desinscrire et lance la desincription
+	 */
 	public void desinscriptionTrajet(){
 		System.out.println("Entrez le numéro du Trajet dont vous voulez vous desinscrire.");
 		System.out.println("Pour annuler taper 0");
@@ -565,6 +570,10 @@ public class Covoiturage implements java.io.Serializable{
 		}
 	}
 	
+	/**
+	 * Affiche le menu principal et demande à l'utilisateur s'il veut chercher un trajet, creer un trajet, afficher ses trajets, afficher son profil et se deconnecter.
+	 * @throws ParseException
+	 */
 	public void menuPrincipal() throws ParseException{
 		System.out.println("--------------------------");
 		if (connecte.afficherMessage().equals("")){
