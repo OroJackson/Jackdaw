@@ -128,14 +128,27 @@ public class Trajet implements java.io.Serializable{
 		return affichage;
 	}
 	
+	/**
+	 * Renvoi l'affichage court d'un trajet.
+	 * @return
+	 */
 	public String toStringNotif(){
 		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annulé.";
 	}
 	
+	/**
+	 * Enléve le participant p de la liste des participant au trjate.
+	 * @param p Participant à enlever de la liste.
+	 */
 	public void enleverParticipant(Passager p){
 		inscrit.remove(p);
 	}
 	
+	/**
+	 * Fonction renvoyant si un Passager est ou n'est pas un participant au trajet.
+	 * @param p Participant à tester
+	 * @return True si p est un participant, false sinon.
+	 */
 	public boolean estUnParticipant(Passager p){
 		for(int i=0; i<inscrit.size(); i++){
 			if (inscrit.get(i).getPseudo().equals(p.getPseudo())){
@@ -144,7 +157,11 @@ public class Trajet implements java.io.Serializable{
 		}
 		return false;
 	}
-	
+	/**
+	 * Fonction renvoyant si un Passager est ou n'est pas le conducteur du trajet.
+	 * @param p Participant à tester
+	 * @return True si p est le conducteur, false sinon.
+	 */
 	public boolean estLeConducteur(Passager p){
 		return chauffeur.getPseudo().equals(p.getPseudo());
 	}
