@@ -243,7 +243,6 @@ public class Covoiturage implements java.io.Serializable{
 	 * @param d Date du trajet.
 	 * @param villeD Ville de départ du trajet.
 	 * @param villeA Ville d'arrivée du trajet.
-	 * @param heure Heure du départ du trajet.
 	 * @param p Chauffeur du trajet.
 	 * @throws ParseException
 	 */
@@ -257,7 +256,6 @@ public class Covoiturage implements java.io.Serializable{
 	 * @param d Date du trajet.
 	 * @param villeD Ville de départ du trajet.
 	 * @param villeA Ville d'arrivée du trajet
-	 * @param heure Heure de départ du trajet.
 	 * @throws ParseException
 	 */
 	public void devCreationTrajetSSChauffeur(DatePerso d,String villeD,String villeA) throws ParseException{

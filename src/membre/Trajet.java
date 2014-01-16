@@ -46,7 +46,6 @@ public class Trajet implements java.io.Serializable{
 	 * @param dateTrajet , date du trajet propos��
 	 * @param villeDepart , ville de depart du trajet
 	 * @param villeArrivee , ville d'arriv��e du trajet
-	 * @param heureDepart  , heure de depart du trajet
 	 * @param chauffeur , passager du trajet qui sera conducteur et donc qui fourni la voiture
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
