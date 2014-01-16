@@ -3,8 +3,12 @@ package membre;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Passager {
+public class Passager implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String pseudo;
 	private String nom;
 	private String prenom;
@@ -16,6 +20,9 @@ public class Passager {
 	private List<Trajet> mesTrajets= new ArrayList<Trajet>();
 	private List<Voiture> voitures = new ArrayList<Voiture>();
 	
+	public List<Voiture> getVoitures() {
+		return voitures;
+	}
 	public Passager (String pseudo,String nom, String prenom, String email,String telephone,String mdp){
 		this.pseudo=pseudo;
 		this.nom=nom;
@@ -38,7 +45,9 @@ public class Passager {
 	public void viderMessage(){
 		message="";
 	}
-	
+	public int nbVoitures(){
+		return voitures.size();
+	}
 	public void addTrajet(Trajet t){
 		int i=0;
 		while(i<mesTrajets.size()){

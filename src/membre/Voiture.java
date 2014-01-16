@@ -4,7 +4,11 @@ package membre;
  * @author AurelieDigeon
  *@version 1.0
  */
-public class Voiture {
+public class Voiture implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String modele;
 	private String couleur;
 	private int nbPlaces;
