@@ -10,12 +10,12 @@ public class Passager implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected String pseudo;
-	private String nom;
-	private String prenom;
-	private String email;
-	private String telephone;
-	private String mdp;
-	private String message="";
+	protected String nom;
+	protected String prenom;
+	protected String email;
+	protected String telephone;
+	protected String mdp;
+	protected String message="";
 	
 	private List<Trajet> mesTrajets= new ArrayList<Trajet>();
 	private List<Voiture> voitures = new ArrayList<Voiture>();
@@ -23,6 +23,8 @@ public class Passager implements java.io.Serializable{
 	public List<Voiture> getVoitures() {
 		return voitures;
 	}
+	protected Passager(){}
+	
 	public Passager (String pseudo,String nom, String prenom, String email,String telephone,String mdp){
 		this.pseudo=pseudo;
 		this.nom=nom;
@@ -40,7 +42,9 @@ public class Passager implements java.io.Serializable{
 	}
 	
 	public String afficherMessage(){
-		return message;
+		String mess=message;
+		viderMessage();
+		return mess;
 	}
 	public void viderMessage(){
 		message="";

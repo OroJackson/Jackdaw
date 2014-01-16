@@ -11,9 +11,7 @@ import java.text.*;
  * @version 1.0
  */
 public class Trajet implements java.io.Serializable{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	protected DatePerso dateTrajet=new DatePerso();
 	protected String villeDepart;
@@ -113,7 +111,9 @@ public class Trajet implements java.io.Serializable{
 	public boolean aUnConducteur(){
 		return chauffeur!=null;
 	}	
-	
+	/**
+	 * methode permettant l'affichage d'un trajet,
+	 */
 	public String toString(){
 		String affichage="Date: "+ dateTrajet.toStringDate() +"\n"+"   Heure: "+dateTrajet.toStringHeure()+"\n"+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
 				if(chauffeur==null){
@@ -126,15 +126,25 @@ public class Trajet implements java.io.Serializable{
 				}
 		return affichage;
 	}
-	
+	/**
+	 * methode permettant l'envoi d'une notification signalant la supression d'un trajet
+	 * @return
+	 */
 	public String toStringNotif(){
-		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet+" est annulé.";
+		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet.toStringDate()+" est annulé.";
 	}
-	
+	/**
+	 * Methode permettant de retirer un passager inscrit a un trajet
+	 * @param p Pasager supprimer du trajet
+	 */
 	public void enleverParticipant(Passager p){
 		inscrit.remove(p);
 	}
-	
+	/**
+	 * methode permettant de verifier si un Passager est deja un participant d'un trajet
+	 * @param p Passager dont on test la presence dans les inscrit au trajet
+	 * @return vrai si il est deja inscrit faux sinon
+	 */
 	public boolean estUnParticipant(Passager p){
 		for(int i=0; i<inscrit.size(); i++){
 			if (inscrit.get(i).getPseudo().equals(p.getPseudo())){
@@ -143,11 +153,20 @@ public class Trajet implements java.io.Serializable{
 		}
 		return false;
 	}
-	
+	/**
+	 * Methode permettant de savoir si un Passger est le conducteur du trajet
+	 * @param p passager que l'on test comme conducteur d'un trajet
+	 * @return
+	 */
 	public boolean estLeConducteur(Passager p){
 		return chauffeur.getPseudo().equals(p.getPseudo());
 	}
 	
+
+	public void addConducteur(Passager connecte) {
+		this.chauffeur=connecte;
+		this.voiture=connecte.getVoiture();
+	}
 	public DatePerso getDateTrajet() {
 		return dateTrajet;
 	}
@@ -168,10 +187,6 @@ public class Trajet implements java.io.Serializable{
 		return inscrit;
 	}
 
-	public void addConducteur(Passager connecte) {
-		// TODO Auto-generated method stub
-		
-	}
 }
 
 

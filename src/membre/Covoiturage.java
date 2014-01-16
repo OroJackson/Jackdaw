@@ -100,7 +100,7 @@ public class Covoiturage implements java.io.Serializable{
 	
 	public boolean isNumeric(String telephone){  
 	  try  {  
-	    double d = Double.parseDouble(telephone);  
+	    double d = Double.parseDouble(telephone);
 	  } catch(NumberFormatException nfe) {  
 	    return false;  
 	  }  
