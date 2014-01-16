@@ -10,11 +10,11 @@ public class Voiture {
 	private int nbPlaces;
 	private int confort;
 	/**
-	 * Constructeur unique permettant la création d'une voiture
+	 * Constructeur unique permettant la cr��ation d'une voiture
 	 * 
 	 * @param modele modele de la voiture
 	 * @param couleur Couleur de la voiture 
-	 * @param confort Confort estimé par le proprietaire de la voiture
+	 * @param confort Confort estim�� par le proprietaire de la voiture
 	 * @param nbPlaces Nombre de place hors conducteur de la voiture
 	 */
 	public Voiture (String modele, String couleur, int confort, int nbPlaces){
@@ -30,9 +30,9 @@ public class Voiture {
 		}
 	}
 	/**
-	 * methode permettant de testé l'égalité de deux voitures.
-	 * @param v voiture avec laquel on veut testé l'égalité.
-	 * @return un booleen vrai si les deux voitures sont en fait la même, faux sinon.
+	 * methode permettant de test�� l'��galit�� de deux voitures.
+	 * @param v voiture avec laquel on veut test�� l'��galit��.
+	 * @return un booleen vrai si les deux voitures sont en fait la m��me, faux sinon.
 	 */
 	public boolean equals(Voiture v){
 		return (modele.equals(v.modele) && couleur.equals(v.couleur) && confort==v.confort && nbPlaces==v.nbPlaces);
@@ -54,6 +54,9 @@ public class Voiture {
 	 */
 	public int getPlace(){
 		return nbPlaces;
+	}
+	public String toStringCourt(){
+		return modele + " "+ couleur+" (confort: "+confort+"/5)\n";
 	}
 }
 

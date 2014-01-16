@@ -39,6 +39,8 @@ public class DatePerso extends GregorianCalendar{
 		Date heure = format.parse(heureT);
 		setTime(heure);
 		}catch(ParseException p){
+			//System.err.println(p);
+			p.printStackTrace();
 			return false;
 		}
 		return true;
