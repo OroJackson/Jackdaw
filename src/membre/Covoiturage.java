@@ -71,9 +71,16 @@ public class Covoiturage implements java.io.Serializable{
 				System.out.println("Adresse email incorrect.");
 			}
 		} while (!verifMail(email));
+		
+		String telephone="";
+		do {
+			System.out.print("Telephone :");
+			telephone= sc.nextLine();
+			if (!verifTelephone(telephone)){
+				System.out.println("Telephone incorrect.");
+			}
+		} while (!verifTelephone(telephone));
 
-		System.out.print("Telephone :");
-		String telephone= sc.nextLine();
 		
 		Passager p=new Passager(pseudo,nom,prenom,email,telephone,mdp);
 		membres.add(p);
@@ -90,6 +97,7 @@ public class Covoiturage implements java.io.Serializable{
 	public boolean verifTelephone(String telephone){
 		return telephone.charAt(0)=='0' && isNumeric(telephone) && telephone.length()==10;
 	}
+	
 	public boolean isNumeric(String telephone){  
 	  try  {  
 	    double d = Double.parseDouble(telephone);  
