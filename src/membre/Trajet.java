@@ -126,7 +126,6 @@ public class Trajet implements java.io.Serializable{
 				}
 		return affichage;
 	}
-<<<<<<< HEAD
 	/**
 	 * methode permettant l'envoi d'une notification signalant la supression d'un trajet
 =======
@@ -139,7 +138,6 @@ public class Trajet implements java.io.Serializable{
 	public String toStringNotif(){
 		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet.toStringDate()+" est annulé.";
 	}
-<<<<<<< HEAD
 	/**
 	 * Methode permettant de retirer un passager inscrit a un trajet
 	 * @param p Pasager supprimer du trajet
@@ -153,7 +151,6 @@ public class Trajet implements java.io.Serializable{
 	public void enleverParticipant(Passager p){
 		inscrit.remove(p);
 	}
-<<<<<<< HEAD
 	/**
 	 * methode permettant de verifier si un Passager est deja un participant d'un trajet
 	 * @param p Passager dont on test la presence dans les inscrit au trajet

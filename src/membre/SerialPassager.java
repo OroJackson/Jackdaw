@@ -15,6 +15,10 @@ public class SerialPassager extends Passager implements Serializable {
      this.pseudo=passagerToClone.getPseudo();
      this.nom=passagerToClone.getNom();
      this.prenom=passagerToClone.getPrenom();
+     this.email=passagerToClone.getEmail();
+     this.mdp=passagerToClone.getMdp();
+     this.telephone=passagerToClone.getTelephone();
+     this.message=passagerToClone.getMessage();
     }
 
 }

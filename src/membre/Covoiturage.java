@@ -38,9 +38,9 @@ public class Covoiturage implements java.io.Serializable{
 		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
-		devCreationTrajetACChauffeur("12:13:2014","test1","test1","18:00",tmp);
-		devCreationTrajetACChauffeur("12:13:2014","test2","test3","17:00",tmp);
-		devCreationTrajetACChauffeur("12:13:2014","test3","test4","17:00",tmp);
+		devCreationTrajetACChauffeur(new DatePerso("12:13:2014"),"test1","test1",tmp);
+		devCreationTrajetACChauffeur(new DatePerso("12:13:2014"),"test2","test3",tmp);
+		devCreationTrajetACChauffeur(new DatePerso("12:13:2014"),"test3","test4",tmp);
 	}
 	
 	private Scanner sc= new Scanner (System.in);
@@ -240,14 +240,41 @@ public class Covoiturage implements java.io.Serializable{
 	 * @throws ParseException
 	 */
 	public void creationTrajet() throws ParseException{
-		System.out.println("Date du Trajet? (JJ:MM:AA)");
-		String dateTrajet =sc.nextLine();
+
+		DatePerso dateTrajet = new DatePerso();
+		boolean dateOK=false,heureOK=false;
+		while (!dateOK){
+			System.out.println("Date du Trajet? (JJ:MM:AAAA)");
+			String dateT =sc.nextLine();
+			try{
+				dateTrajet.toDate(dateT);
+				dateOK=true;
+			}catch(ParseException p){
+				p.printStackTrace();
+				System.out.println("\n");
+				dateOK= false;
+				System.out.println("Erreur de saisie pour la Date, veuillez recommencez(JJ:MM:AAAA)");
+			}
+		}
 		System.out.println("Ville de depart?");
 		String villeDepart=sc.nextLine();
 		System.out.println("Ville d'arrivee?");
 		String villeArrivee=sc.nextLine();
-		System.out.println("Heure de depart du trajet ?(HH:MM)");
-		String heureDepart=sc.nextLine();
+		while (!heureOK){
+			System.out.println("Heure de depart du trajet ?(HH:MM)");
+			String heureD=sc.nextLine();
+			try{
+				dateTrajet.setHeureDepart(heureD);
+				heureOK=true;
+			}catch(ParseException p){
+
+				//System.err.println(p);
+				p.printStackTrace();
+				heureOK= false;
+				System.out.println("Erreur de saisie pour l'heure, veuillez recommencez(HH:MM)");
+			}
+		}
+
 		System.out.println("Etes vous le conducteur de ce trajet ?(o/n)");
 		String rep=sc.nextLine();
 		while(rep.equals("o") && rep.equals("n")){
@@ -255,16 +282,19 @@ public class Covoiturage implements java.io.Serializable{
 			rep=sc.nextLine();
 		}
 		if(rep.equals("o")){
-			Trajet courant=new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart,connecte);
+			Trajet courant=new Trajet(dateTrajet,villeDepart,villeArrivee,connecte);
 			trajets.add(courant);
 			connecte.addTrajet(courant);
 		}else{
-			Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee,heureDepart);
+			Trajet courant =new Trajet(dateTrajet,villeDepart,villeArrivee);
 			courant.addParticipant(connecte);
 			trajets.add(courant);
 			connecte.addTrajet(courant);
 		}
+
 	}
+
+
 	
 	/**
 	 * Méthode de develloppement pour creer rapidement un trajet avec chauffeur.
@@ -274,8 +304,8 @@ public class Covoiturage implements java.io.Serializable{
 	 * @param p Chauffeur du trajet.
 	 * @throws ParseException
 	 */
-	public void devCreationTrajetACChauffeur(String d,String villeD,String villeA,String heure,Passager p) throws ParseException{
-		Trajet t =new Trajet(d,villeD,villeA,heure,p);
+	public void devCreationTrajetACChauffeur(DatePerso d,String villeD,String villeA,Passager p) throws ParseException{
+		Trajet t =new Trajet(d,villeD,villeA,p);
 		trajets.add(t);
 		p.addTrajet(t);
 	}
@@ -286,8 +316,8 @@ public class Covoiturage implements java.io.Serializable{
 	 * @param villeA Ville d'arrivée du trajet
 	 * @throws ParseException
 	 */
-	public void devCreationTrajetSSChauffeur(String d,String villeD,String villeA,String heure) throws ParseException{
-		Trajet t =new Trajet(d,villeD,villeA,heure);
+	public void devCreationTrajetSSChauffeur(DatePerso d,String villeD,String villeA) throws ParseException{
+		Trajet t =new Trajet(d,villeD,villeA);
 		trajets.add(t);
 	}
 	/**
