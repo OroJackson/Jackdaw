@@ -19,7 +19,7 @@ public class Covoiturage {
 		membres.add(tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
-		devCreationTrajetACChauffeur("12:13:2014","test1","test1","17:00",tmp);
+		devCreationTrajetACChauffeur("12:13:2014","test1","test1","18:00",tmp);
 		devCreationTrajetACChauffeur("12:13:2014","test2","test3","17:00",tmp);
 		devCreationTrajetACChauffeur("12:13:2014","test3","test4","17:00",tmp);
 	}
