@@ -1,4 +1,4 @@
-package membre;
+package membreSave;
 
 public class Telephone {
 	protected String numero;
@@ -14,7 +14,7 @@ public class Telephone {
 		}
 		catch (NotTelException e){
 			// Le numero de telephone n'est pas de la bonne taille;
-			System.out.println("Numero de téléphone incorrect");
+			System.out.println("Numero de t??l??phone incorrect");
 			numero="incorrect";
 			correct = true;
 		}

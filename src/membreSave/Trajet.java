@@ -1,4 +1,4 @@
-package membre;
+package membreSave;
 
 import java.util.*;
 import java.text.*;
@@ -11,7 +11,7 @@ import java.text.*;
  * @version 1.0
  */
 public class Trajet implements java.io.Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	protected DatePerso dateTrajet=new DatePerso();
 	protected String villeDepart;
@@ -23,9 +23,9 @@ public class Trajet implements java.io.Serializable{
 	/**
 	 * Constructeur de Trajet n'initialisant pas le Chauffeur du trajet(Trajet en attente d'un chauffeur)
 	 * 
-	 * @param dateTrajet , date du trajet propos��
+	 * @param dateTrajet , date du trajet propos??????
 	 * @param villeDepart , ville de depart du trajet
-	 * @param villeArrivee , ville d'arriv��e du trajet
+	 * @param villeArrivee , ville d'arriv??????e du trajet
 	 * @param heureDepart  , heure de depart du trajet
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
@@ -34,16 +34,16 @@ public class Trajet implements java.io.Serializable{
 		this.dateTrajet=dateT;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
-	
+
 		inscrit = new ArrayList<Passager>();
 	}
-	
+
 	/**
-	 * Constructeur initialisant le chauffeur du trajet(Trajet cr��e par un conducteur)
+	 * Constructeur initialisant le chauffeur du trajet(Trajet cr??????e par un conducteur)
 	 * 
-	 * @param dateTrajet , date du trajet propos��
+	 * @param dateTrajet , date du trajet propos??????
 	 * @param villeDepart , ville de depart du trajet
-	 * @param villeArrivee , ville d'arriv��e du trajet
+	 * @param villeArrivee , ville d'arriv??????e du trajet
 	 * @param chauffeur , passager du trajet qui sera conducteur et donc qui fourni la voiture
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
@@ -57,10 +57,10 @@ public class Trajet implements java.io.Serializable{
 		inscrit = new ArrayList<Passager>();
 	}
 
-/**
- *  methode permettant de savoir si un trajet est plein ou pas ou s'il attend un conducteur.
- * @return un Int 1 signifiant que le trajet est plein, 0 s'il n'est pas plein, -1 si il est en attente d'un conducteur
- */
+	/**
+	 *  methode permettant de savoir si un trajet est plein ou pas ou s'il attend un conducteur.
+	 * @return un Int 1 signifiant que le trajet est plein, 0 s'il n'est pas plein, -1 si il est en attente d'un conducteur
+	 */
 	public int estPlein(){
 		if (chauffeur!=null){
 			if (inscrit.size()==chauffeur.getVoiture().getPlace()){
@@ -73,10 +73,10 @@ public class Trajet implements java.io.Serializable{
 		}
 	}
 
-/**
- * methode permettant de savoir combien de place il reste(0 si le trajet est plein)
- * @return un int nbPlaceRestante corredpondant au nombre de places restantes.
- */
+	/**
+	 * methode permettant de savoir combien de place il reste(0 si le trajet est plein)
+	 * @return un int nbPlaceRestante corredpondant au nombre de places restantes.
+	 */
 	public int nbPlaceRestante(){
 		if(this.estPlein()==0){
 			return chauffeur.getVoiture().getPlace()-inscrit.size();
@@ -84,11 +84,11 @@ public class Trajet implements java.io.Serializable{
 			return 0;
 		}	
 	}
-/**
- * Methode permettant d'ajouter un passager a un trajet
- * @param p : instance de passager a ajouter au trajet
- * @return un booleen vrai si le trajet n'��tait pas plein, faux si il etait plein
- */
+	/**
+	 * Methode permettant d'ajouter un passager a un trajet
+	 * @param p : instance de passager a ajouter au trajet
+	 * @return un booleen vrai si le trajet n'??????tait pas plein, faux si il etait plein
+	 */
 	public boolean addParticipant(Passager p){
 		if(this.estPlein()==0){
 			inscrit.add(p);
@@ -97,17 +97,17 @@ public class Trajet implements java.io.Serializable{
 			return false;
 		}
 	}
-/**
- * methode permettant de savoir si le trajet n'a aucun passager
- * @return un booleen vrai si il n'y a aucun inscrit, faut sinon
- */
+	/**
+	 * methode permettant de savoir si le trajet n'a aucun passager
+	 * @return un booleen vrai si il n'y a aucun inscrit, faut sinon
+	 */
 	public boolean estVide(){
 		return inscrit.size()==0;
 	}
-/**
- * methode permettant de savoir si le trajet a un chauffeur
- * @return un booleen vrai si il y a un chauffeur , faux sinon
- */
+	/**
+	 * methode permettant de savoir si le trajet a un chauffeur
+	 * @return un booleen vrai si il y a un chauffeur , faux sinon
+	 */
 	public boolean aUnConducteur(){
 		return chauffeur!=null;
 	}	
@@ -116,37 +116,33 @@ public class Trajet implements java.io.Serializable{
 	 */
 	public String toString(){
 		String affichage="Date: "+ dateTrajet.toStringDate() +"\n"+"   Heure: "+dateTrajet.toStringHeure()+"\n"+"   Depart: "+villeDepart+"\n"+"   Arrivee: "+villeArrivee+"\n";
-				if(chauffeur==null){
-					affichage+="   Chauffeur: Aucun\n";
-					affichage+="   En attente d'un chauffeur";
-				}else{
-					affichage+="   Chauffeur: "+chauffeur.getPseudo()+"\n";
-					affichage+="   Voiture : "+voiture.toStringCourt();
-					affichage+="   Nombre de Place restante(s): "+nbPlaceRestante()+"\n";
-				}
+		if(chauffeur==null){
+			affichage+="   Chauffeur: Aucun\n";
+			affichage+="   En attente d'un chauffeur";
+		}else{
+			affichage+="   Chauffeur: "+chauffeur.getPseudo()+"\n";
+			affichage+="   Voiture : "+voiture.toStringCourt();
+			affichage+="   Nombre de Place restante(s): "+nbPlaceRestante()+"\n";
+		}
 		return affichage;
 	}
 	/**
 	 * methode permettant l'envoi d'une notification signalant la supression d'un trajet
-=======
-	
+
 	/**
 	 * Renvoi l'affichage court d'un trajet.
->>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 * @return
 	 */
 	public String toStringNotif(){
-		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet.toStringDate()+" est annulé.";
+		return "Le trajet de "+villeDepart+" a "+villeArrivee+" le "+dateTrajet.toStringDate()+" est annul??.";
 	}
 	/**
 	 * Methode permettant de retirer un passager inscrit a un trajet
 	 * @param p Pasager supprimer du trajet
-=======
-	
+
 	/**
-	 * Enléve le participant p de la liste des participant au trjate.
-	 * @param p Participant à enlever de la liste.
->>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
+	 * Enl??ve le participant p de la liste des participant au trjate.
+	 * @param p Participant ?? enlever de la liste.
 	 */
 	public void enleverParticipant(Passager p){
 		inscrit.remove(p);
@@ -155,13 +151,11 @@ public class Trajet implements java.io.Serializable{
 	 * methode permettant de verifier si un Passager est deja un participant d'un trajet
 	 * @param p Passager dont on test la presence dans les inscrit au trajet
 	 * @return vrai si il est deja inscrit faux sinon
-=======
-	
+
 	/**
 	 * Fonction renvoyant si un Passager est ou n'est pas un participant au trajet.
-	 * @param p Participant à tester
+	 * @param p Participant ?? tester
 	 * @return True si p est un participant, false sinon.
->>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 */
 	public boolean estUnParticipant(Passager p){
 		for(int i=0; i<inscrit.size(); i++){
@@ -172,20 +166,17 @@ public class Trajet implements java.io.Serializable{
 		return false;
 	}
 	/**
-<<<<<<< HEAD
 	 * Methode permettant de savoir si un Passger est le conducteur du trajet
 	 * @param p passager que l'on test comme conducteur d'un trajet
 	 * @return
-=======
 	 * Fonction renvoyant si un Passager est ou n'est pas le conducteur du trajet.
-	 * @param p Participant à tester
+	 * @param p Participant ?? tester
 	 * @return True si p est le conducteur, false sinon.
->>>>>>> f768630cfb44e4d38524776fb7fc19b6eb96db2b
 	 */
 	public boolean estLeConducteur(Passager p){
 		return chauffeur.getPseudo().equals(p.getPseudo());
 	}
-	
+
 
 	public void addConducteur(Passager connecte) {
 		this.chauffeur=connecte;

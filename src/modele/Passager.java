@@ -1,4 +1,4 @@
-package membre;
+package modele;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +144,7 @@ public class Passager implements java.io.Serializable{
 	}
 	
 	public String toString (){
-		return "  Pseudo : " + pseudo + "\n  Nom : "+ nom +"\n  Prénom : "+ prenom +"\n  Email : "+ email +"\n  Téléphone : "+ telephone;
+		return "  Pseudo : " + pseudo + "\n  Nom : "+ nom +"\n  Pr??nom : "+ prenom +"\n  Email : "+ email +"\n  T??l??phone : "+ telephone;
 	}
 	
 	public String afficherVoitures(){

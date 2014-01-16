@@ -1,4 +1,4 @@
-package membre;
+package technique;
 
 import java.text.*;
 import java.util.*;

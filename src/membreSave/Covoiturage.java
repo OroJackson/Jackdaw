@@ -1,13 +1,8 @@
-package membre;
+package membreSave;
 
 
 import java.text.*;
 import java.util.*;
-
-import modele.Passager;
-import modele.Trajet;
-import modele.Voiture;
-import technique.DatePerso;
 
 /**
  * Classe Covoiturage. Regroupe l'ensemble des fonctionnalit?? du covoiturage
@@ -30,16 +25,16 @@ public class Covoiturage implements java.io.Serializable{
 	public Covoiturage() throws ParseException{
 		Passager tmp=new Passager("admin",null,null,null,null,"mdp");
 		membres.add(tmp);
-		pseudos.add(tmp.getPseudo());
+		pseudos.add(tmp.pseudo);
 		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp.ajouterVoiture(new Voiture("Ferrari","Rouge",5,1));
 		tmp= new Passager("Dashell","Galas","Alain","galasx@gmail.com",null,"mdp");
 		membres.add(tmp);
-		pseudos.add(tmp.getPseudo());
+		pseudos.add(tmp.pseudo);
 		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp= new Passager("Aurie","Digeon","Aur??lie","aurelie.digeon@gmail.com",null,"mdp");
 		membres.add(tmp);
-		pseudos.add(tmp.getPseudo());
+		pseudos.add(tmp.pseudo);
 		pseudoMdp.put(tmp.getPseudo(), tmp);
 		tmp.ajouterVoiture(new Voiture("C3","Blanche",5,4));
 
