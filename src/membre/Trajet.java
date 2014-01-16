@@ -18,11 +18,9 @@ public class Trajet implements java.io.Serializable{
 	protected DatePerso dateTrajet=new DatePerso();
 	protected String villeDepart;
 	protected String villeArrivee;
-	protected int heureDepart;
 	protected Passager chauffeur;
 	protected Voiture voiture;
 	protected List<Passager> inscrit;
-	private Scanner scT;
 
 	/**
 	 * Constructeur de Trajet n'initialisant pas le Chauffeur du trajet(Trajet en attente d'un chauffeur)
@@ -34,21 +32,11 @@ public class Trajet implements java.io.Serializable{
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
 	 */
-	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart) throws ParseException{
-		while(!this.dateTrajet.toDate(dateT)){
-			System.out.println("Erreur de saisie pour la Date, veuillez recommencez(JJ:MM:AAAA)");
-			scT = new Scanner (System.in);
-			dateT=scT.nextLine();
-		}
-		this.dateTrajet.toDate(dateT);
+	public Trajet(DatePerso dateT,String villeDepart,String villeArrivee) throws ParseException{
+		this.dateTrajet=dateT;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
-		while(!this.dateTrajet.setHeureDepart(heureDepart)){
-			System.out.println("Erreur de saisie pour l'heure, veuillez recommencez(HH:MM)");
-			scT =new Scanner (System.in);
-			heureDepart=scT.nextLine();
-		}
-		this.dateTrajet.setHeureDepart(heureDepart);
+	
 		inscrit = new ArrayList<Passager>();
 	}
 	
@@ -63,15 +51,13 @@ public class Trajet implements java.io.Serializable{
 	 * @param inscrit , liste de passager inscrit au trajet, conducteur non compris.
 	 * @throws ParseException 
 	 */
-	public Trajet(String dateT,String villeDepart,String villeArrivee,String heureDepart,Passager chauffeur) throws ParseException{
-		this.dateTrajet.toDate(dateT);
+	public Trajet(DatePerso dateT,String villeDepart,String villeArrivee,Passager chauffeur) throws ParseException{
+		this.dateTrajet=dateT;
 		this.villeDepart=villeDepart;
 		this.villeArrivee=villeArrivee;
-		this.dateTrajet.setHeureDepart(heureDepart);
 		this.chauffeur=chauffeur;
 		this.voiture=chauffeur.getVoiture();
 		inscrit = new ArrayList<Passager>();
-		
 	}
 
 /**
@@ -173,10 +159,6 @@ public class Trajet implements java.io.Serializable{
 
 	public String getVilleArrivee() {
 		return villeArrivee;
-	}
-
-	public int getHeureDepart() {
-		return heureDepart;
 	}
 
 	public Passager getChauffeur() {
