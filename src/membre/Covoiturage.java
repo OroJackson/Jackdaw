@@ -91,15 +91,7 @@ public class Covoiturage {
 		String mdp = sc.nextLine();
 		System.out.println();
 		
-		
-		
-		for (int i=0;i<membres.size();i++){
-			if(membres.get(i).pseudo.equals(pseudo) && membres.get(i).getMdp().equals(mdp)){
-				connecte=membres.get(i);
-				return true;
-			}
-		}
-		return false;
+		return (pseudoMdp.get(pseudo).equals(mdp));
 	}
 	/**
 	 * Méthode donnant le choix a l'utilisateur de réésayer la connexion ou de revenir au Menu
