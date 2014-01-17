@@ -354,45 +354,57 @@ public class Covoiturage implements java.io.Serializable{
 		int reponse = sc.nextInt();
 		sc.nextLine();
 		System.out.println();
+		switch(reponse){
+
+		case 1:
+			inscriptionTrajet(trajetsRecherche);
+			break;
+		case 0:
+			break;
+		}
+
+
+	}
 		
-		if (reponse==1){
-			System.out.println("(Taper 0 pour quitter)");
-			System.out.println("Num??ro du trajet : ");
+	
+	private void inscriptionTrajet(List<Trajet> trajetsRecherche) {
+		int reponse;
+		System.out.println("(Taper 0 pour quitter)");
+		System.out.println("Num??ro du trajet : ");
+		System.out.print("Votre choix : ");
+		reponse = sc.nextInt();
+		sc.nextLine();
+		System.out.println();
+		while (reponse<0 || reponse >trajetsRecherche.size()){
+			System.out.println("Ce trajet n'existe pas.");
 			System.out.print("Votre choix : ");
 			reponse = sc.nextInt();
 			sc.nextLine();
 			System.out.println();
-			while (reponse<0 || reponse >trajetsRecherche.size()){
-				System.out.println("Ce trajet n'existe pas.");
-				System.out.print("Votre choix : ");
-				reponse = sc.nextInt();
-				sc.nextLine();
-				System.out.println();
-			}
-			if (reponse!=0){
-				boolean conducteur=false;
-				Trajet courant= trajetsRecherche.get(reponse-1);
-				if (courant.estUnParticipant(connecte) || courant.estLeConducteur(connecte)){
-					System.out.println("Vous etes d??j?? inscrit ?? ce trajet.");
-				} else if (courant.estPlein()==1){
-					System.out.println("Le trajet est plein.");
-				} else {
-					if(!courant.aUnConducteur() && connecte.estUnConducteur()){
-						System.out.println("Voulez-vous vous incrire en tant que conducteur ?(o/n)");
-						String choix =sc.nextLine();
-						if (choix.equals("o")){
-							conducteur=true;
-						} 
+		}
+		if (reponse!=0){
+			boolean conducteur=false;
+			Trajet courant= trajetsRecherche.get(reponse-1);
+			if (courant.estUnParticipant(connecte) || courant.estLeConducteur(connecte)){
+				System.out.println("Vous etes d??j?? inscrit ?? ce trajet.");
+			} else if (courant.estPlein()==1){
+				System.out.println("Le trajet est plein.");
+			} else {
+				if(!courant.aUnConducteur() && connecte.estUnConducteur()){
+					System.out.println("Voulez-vous vous incrire en tant que conducteur ?(o/n)");
+					String choix =sc.nextLine();
+					if (choix.equals("o")){
+						conducteur=true;
 					} 
-					if (conducteur){
-						courant.addConducteur(connecte);
-						connecte.addTrajet(courant);
-					} else {
-						courant.addParticipant(connecte);
-						connecte.addTrajet(courant);
-					}
-					System.out.println("Vous ??tes maintenant inscrit ?? ce trajet.");
+				} 
+				if (conducteur){
+					courant.addConducteur(connecte);
+					connecte.addTrajet(courant);
+				} else {
+					courant.addParticipant(connecte);
+					connecte.addTrajet(courant);
 				}
+				System.out.println("Vous ??tes maintenant inscrit ?? ce trajet.");
 			}
 		}
 	}
@@ -540,12 +552,12 @@ public class Covoiturage implements java.io.Serializable{
 		System.out.println("Entrez le num??ro du Trajet que vous voulez supprimer.");
 		System.out.println("Pour annuler taper 0");
 		System.out.println("(ATTENTION Tout ceux qui ??tait inscrit a votre Trajet recevront un message de suppression)\n");
-		
+
 		System.out.print("Votre choix : ");
 		int reponse= sc.nextInt();
 		sc.nextLine();
 		System.out.println();
-		
+
 		if (reponse>0){
 			while (reponse>connecte.nbDeTrajets() && reponse>0){
 				System.out.println("Ce trajet n'existe pas.");
@@ -555,14 +567,18 @@ public class Covoiturage implements java.io.Serializable{
 				System.out.println();
 			}
 			if (reponse>0){
-				if (connecte.trajetA(reponse-1).getChauffeur().getPseudo().equals(connecte.getPseudo())){
-					envoyerMessageSuppression(connecte.trajetA(reponse-1));
-					connecte.supprimerTrajet(connecte.trajetA(reponse-1));
-					System.out.println("Le trajet "+ reponse+" a ??t?? supprim??.");
-				} else {
-					System.out.println("Vous etes passager. \nUtiliser l'option 'Se desinscrire'.");
+				if (connecte.trajetA(reponse-1).getChauffeur()!=null){
+					if (connecte.trajetA(reponse-1).getChauffeur().getPseudo().equals(connecte.getPseudo())){
+						envoyerMessageSuppression(connecte.trajetA(reponse-1));
+						connecte.supprimerTrajet(connecte.trajetA(reponse-1));
+						System.out.println("Le trajet "+ reponse+" a ??t?? supprim??.");
+					} else {
+						System.out.println("Vous n'etes pas le conducteur de ce trajet. \n veuillez utilisez l'option \"Se desinscrire\" \n");
+					}
+				}else{
+					System.out.println("Ce trajet n'a pas encore de conducteur. \n veuillez utilisez l'option \"Se desinscrire\" \n");
 				}
-			}	
+			}
 		}
 	}
 	/**
@@ -596,7 +612,10 @@ public class Covoiturage implements java.io.Serializable{
 				System.out.println();
 			}
 			if (reponse>0){
-				if (!connecte.trajetA(reponse-1).getChauffeur().getPseudo().equals(connecte.getPseudo())){
+				if(connecte.trajetA(reponse -1).getChauffeur()==null){
+					connecte.supprimerTrajet(connecte.trajetA(reponse -1));
+					System.out.println("Vous vous etes desinscrit avec succes.");
+			}else if (!connecte.trajetA(reponse-1).getChauffeur().getPseudo().equals(connecte.getPseudo())){
 					connecte.trajetA(reponse-1).enleverParticipant(connecte);
 				} else {
 					System.out.println("Vous etes le conducteur. \nPour supprimer utiliser l'option 'Annuler Trajet'.");
