@@ -7,7 +7,7 @@ Projet de 2éme semestre de DUT Informatique. Création d'une application de cov
 ## Licence
 
 ```
-Copyright (c) 2014 Alain Galas, Aurélie Digeon et Verhaeghe Emeline
+Copyright (c) 2014 Alain Galas, Aurélie Digeon
 
 MIT License
 
